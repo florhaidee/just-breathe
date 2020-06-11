@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Just Breathe</title>
 </head>
+
 <body>
-
-    <h1>Hello Everyone</h1>
-
     <header>
-        <h1>Just Breathe</h1>
+        <div>
+            <h1>Just Breathe</h1>
+            <h2>Temp</h2>
+        </div>
     </header>
     <main>
-  <div>my div</div>
-       <p>
-        Get ready to Breathe
-    </p>
-  </main>
-    <footer></footer>
-   
-<script src="./assets/js/script.js"></script>
+        <div id= "container">
+            <div id= "cityName"></div>
+            <div id="date"></div>
+            <div id="aq"></div>
+            <div id="pc"></div>
+        </div>
+        <div id="bottom-div">
+            <div id="history-container">
+                <div id="searchCity"></div>
+                <input type="text" name="cityInput" />
+                <div id="history"></div>
+            </div>
+            <div id="references"></div>
+        </div>
+        
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
