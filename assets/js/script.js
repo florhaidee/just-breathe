@@ -24,6 +24,12 @@ var localIp = function () {
         })
 }
 
+//on page load initialize modal
+$(document).ready(function(){
+    $
+});
+
+
 var buttonClickHandler = function(event) {
 
 }
@@ -34,6 +40,7 @@ $( "#searchCity" ).keypress(function() {
     console.log(city);
     // call Florha and Matt's functions with the value of the text button
   });
+
 
 //on page load grab users ip and parse data for latitude and logitude
 localIp();

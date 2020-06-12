@@ -1,3 +1,8 @@
+
+.margin {
+    margin: 2px;
+}
+
 .background-img {
     background-image: url("../images/james-wheeler-ZOA-cqKuJAA-unsplash.jpg");
     width: auto;
@@ -25,3 +30,4 @@
 #pc {
     font-size: medium;
 } */
+
