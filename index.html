@@ -31,8 +31,48 @@
             </div>
             <div id="references"></div>
         </div>
-        
-    </main>    
+    </main>
+
+<!-- -- -- -- -- Matt's Pollen Count Testing -- -- -- -- -->
+    <section class="container">
+        <div class="row">
+        <!-- Search City Section -->
+        <div class="col-4 bg-light">
+            <p class="search-text my-1">Search For a City</p>
+            <div class="input-group mb-3">
+            <input id="city-input" class="form-control" type="text" placeholder="Enter City Name">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" id="search-button">
+                <i class="fas fa-search"></i>
+                </button>
+            </div>
+            </div>
+            <!-- Clear Button -->
+            <button class="btn btn-primary mb-3" type="button" id="clear-history">Clear History</button>
+            <form id="history"></form>
+        </div>
+
+        <!-- Display -->
+        <section class="col-8">
+            <div class="row mr-0">
+              <div class="col-12 border m-3 rounded">
+                <!-- City Name-->
+                <div class="row">
+                  <div class="col-12">
+                    <span id="city-name" class="city-name align-middle"></span>
+                  </div>
+                </div>
+                <!-- Pollen Count -->
+                <div class="row">
+                    <div class="col-12">
+                    <p id="pollen"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- -- -- -- -- End Matt's Pollen Count Testing -- -- -- -- -->
+          
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/script.js"></script>
