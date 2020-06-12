@@ -21,5 +21,9 @@ var localIp = function () {
             }
         })
 }
+//on page load initialize modal
+$(document).ready(function(){
+    $
+});
 //on page load grab users ip and parse data for latitude and logitude
 localIp();
