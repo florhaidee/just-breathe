@@ -22,26 +22,34 @@ var localIp = function () {
             }
         })
 }
+//display AQI on page
+var displayAQI = function(info){
+    var aqi= info.data.current.pollution.aqius;
+    $("#aq").text("Air Quality Index (AQI)= "+aqi);
+
+}
 //get air quality info receiving as parameters latitude and longitude
 var getAirQuality = function(lat, lon){
-    var apiUrl = `https://api.airvisual.com/v2/nearest_city?lat=${lat}&lot=${lon}&key=${apiAQKey}`
+    //var apiUrl = `https://api.airvisual.com/v2/nearest_city?key=${apiAQKey}`
+    //var apiUrl = `https://api.airvisual.com/v2/city?city=Miami&state=florida&country=USA&key=${apiAQKey}`
+    var apiUrl = `https://api.airvisual.com/v2/nearest_city?lat=${lat}&lon=${lon}&key=${apiAQKey}`
     fetch(apiUrl)
     .then(function(response) {
         // request was successful
         if (response.ok) {
           response.json().then(function(data) {
             console.log(data)
+            displayAQI(data);
         });
         } else {
-          alert("Error: " + response.statusText);
+          alert("Error: City not found, Please try again");
         }
     })
     .catch(function(error) {
-        // Notice this `.catch()` getting chained onto the end of the `.then()` method
         alert("Unable to connect with server");
     });
 }
 //on page load grab users ip and parse data for latitude and logitude
 localIp();
 //use latitude and logitude to get air quality data
-getAirQuality(35.6914300,-100.6381900);
+getAirQuality(40.7608,-111.891);
