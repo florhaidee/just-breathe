@@ -9,36 +9,44 @@
     <title>Just Breathe</title>
 </head>
 
-<body>
-    <div class=" container background-img">
+<body class="white-text background-img">
+    <div class="container">
         <header>
             <div class="row">
-                <div class="left valign-wrapper">
-                    <h1 class="white-text">Just Breathe</h1>
+                <div class="col s4">
+                    <div class="valign-wrapper"> 
+                        <h1 class="flow-text" id="header-title">Just Breathe</h1>
+                    </div>
                 </div>
-                <div class="right valign-wrapper">
-                    <h2 class="white-text">Temp</h2>
+                <div class="col s3 offset-s5">
+                    <div class="valign-wrapper">
+                        <h1 class="flow-text" id="temp-display">Temp</h1>
+                    </div>
                 </div>
             </div>
         </header>
         <main>
             <div class="row">
-                <div class="card col s6 offset-s3" id="container">
-                    <!--this information will need to be dynamically inserted into these divs-->
-                    <div id="cityName">City Placeholder</div>
-                    <div id="date">Date PLaceholder</div>
-                    <div id="aq"> AQ PLaceholder</div>
-                    <div id="pc">PC PLaceholder</div>
+                <div class="col s6 offset-s3 " id="container">
+                    <div class="card transparent center">
+                        <!--this information will need to be dynamically inserted into these divs-->
+                        <div id="cityName">City Placeholder</div>
+                        <div id="date">Date Placeholder</div>
+                        <div id="aq"> AQ PLaceholder</div>
+                        <div id="pc">PC PLaceholder</div>
+                    </div>
                 </div>
             </div>
             <div class="row" id="bottom-div">
-                <div class="col-s3" id="history-container">
+                <div class="col s3" id="history-container">
                     <div id="searchCity">Search for a new city:</div>
                     <input type="text" name="cityInput" />
                     <!--an unordered list will need to be dynamically created in history-->
                     <div id="history">history</div>
                 </div>
-                <div class="offset-s6 col-s3" id="references">Reference Tables</div>
+                <div class="col s3 offset-s6" id="references">
+                    <div>Reference Tables</div>
+                </div>
             </div>
         </main>
     </div>
