@@ -25,6 +25,38 @@ var localIp = function () {
             }
         })
 }
+//on page load grab users ip and parse data for latitude and longitude
+
+localIp();
+
+function pageGenerate(cityName) {
+    const inputEl = document.getElementById("city-input");
+    const searchEl = document.getElementById("search-button");
+    const historyEl = document.getElementById("history");
+    const clearEl = document.getElementById("clear-history");
+    const cityEl = document.getElementById("city-name");
+    const pollenEl = document.getElementById("pollen");
+    
+    // climacell API key
+    // const APIKey = "lvn6KyrmNhV8burwAPT5d50820IijJYY"
+
+    // AirVisual API key
+    const APIKey = "3aed9b70-9747-443a-9751-b784377b3b0d"
+
+    // Stores searched city name
+    let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
+
+    function getAirQuality(cityName) {
+        // Gets API request from AirVisual 
+        let queryURL = `https://api.airvisual.com/v2/city?city=${cityName}&country=USA&key=${APIKey}`;
+        axios.get(queryURL)
+
+        // Display Pollen Count
+        pollenEl.innerHTML = "Pollen: " + response.data.pollen_tree;
+    };
+}
+pageGenerate();
+
 
 //get air quality info receiving as parameters latitude and longitude
 var getAirQuality = function(lat, lon){
@@ -70,3 +102,4 @@ $( "#searchCity" ).keypress(function() {
 localIp();
 //use latitude and logitude to get air quality data
 getAirQuality(35.6914300,-100.6381900);
+
