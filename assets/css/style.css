@@ -1,3 +1,33 @@
+
 .margin {
     margin: 2px;
 }
+
+.background-img {
+    background-image: url("../images/james-wheeler-ZOA-cqKuJAA-unsplash.jpg");
+    width: auto;
+    height: 1580px;
+    background-position: center;
+}
+
+/*#header-title {
+    font-size: medium;
+}
+
+#temp-display {
+    font-size: medium;
+}
+#cityName {
+    font-size: medium;
+}
+#date {
+    font-size: medium;
+}
+
+#aq {
+    font-size: medium;
+}
+#pc {
+    font-size: medium;
+} */
+
