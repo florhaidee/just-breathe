@@ -28,6 +28,8 @@ var localIp = function () {
 
 localIp();
 
+// Matt's work 
+
 function cityDisplay(localIp) {
     const inputEl = document.getElementById("cityInput");
     const searchEl = document.getElementById("searchButton"); // need a search button ID
@@ -86,6 +88,8 @@ function cityDisplay(localIp) {
 }
 
 cityDisplay ();
+
+// end Matt's work
 
 
 //get air quality info receiving as parameters latitude and longitude
