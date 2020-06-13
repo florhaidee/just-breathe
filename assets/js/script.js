@@ -12,8 +12,7 @@ var localIp = function () {
             if (response.ok) {
                 //parse data for JSON payload
                 response.json()
-                    .then(function (data) {
-                        console.log(data);                        
+                    .then(function (data) {                                               
                         var lat = data.latitude
                         var long = data.longitude
                         //displays pollen count with the latitude and longitude from the JSON payload
@@ -97,8 +96,7 @@ var getAirQuality = function(lat, lon){
         // request was successful
         if (response.ok) {
           response.json().then(function(data) {
-            console.log(data)
-        });
+            });
         } else {
           alert("Error: " + response.statusText);
         }
@@ -111,9 +109,9 @@ var getAirQuality = function(lat, lon){
 
 
 //on page load initialize modal
-$(document).ready(function(){
-    $
-});
+$(document).ready(function() {
+    $('.modal').modal();
+     });
 
 
 var buttonClickHandler = function(event) {
