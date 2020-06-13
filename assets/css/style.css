@@ -9,6 +9,10 @@
     height: 1580px;
     background-position: center;
 }
+/* submit button color */
+.btn {
+    background-color: grey;
+}
 
 /*#header-title {
     font-size: medium;

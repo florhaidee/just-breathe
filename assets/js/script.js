@@ -1,6 +1,7 @@
 var apiAQKey = 'afb80771-0c67-4a2e-a14c-1a274a7c0597'
 
-var searchCity = document.querySelector("#searchCity");
+var searchCityEl = document.querySelector("#searchCity");
+var submitBtnEl = document.querySelector("#submit-btn");
 
 //using visitors IP it looks up the city it belongs to
 var localIp = function () {
@@ -86,18 +87,16 @@ $(document).ready(function(){
 
 
 var buttonClickHandler = function(event) {
-
+    var city = event.value;
+    getAirQuality(city);
+    console.log(city);
+    pageGenerate(city);
+    console.log(city);
 }
 
-// captures city name when entered in input field
-$( "#searchCity" ).keypress(function() {
-    var city = document.getElementById("searchCity").value;
-    console.log(city);
-    // call Florha and Matt's functions with the value of the text button
-  });
-
-
-
+  submitBtnEl.addEventListener("click", function() {
+    buttonClickHandler(searchCityEl);
+}); 
 //on page load grab users ip and parse data for latitude and logitude
 localIp();
 //use latitude and logitude to get air quality data
