@@ -70,7 +70,7 @@ function cityDisplay(cityName) {
             historyItem.setAttribute("class", /*set CSS class attributes*/);
             historyItem.setAttribute("value" searchHistory[i]);
             historyItem.addEventListener("click", function() {
-                cityDisplay(historyItem.value);
+                getAirQuality(historyItem.value);
             })
             historyEl.append(historyItem);
         }
@@ -79,7 +79,7 @@ function cityDisplay(cityName) {
     // Saves user's search history and displays them 
     renderSearchHistory();
     if (searchHistory.length > 0) {
-        cityDisplay(searchHistory[searchHistory.length -1]);
+        getAirQuality(searchHistory[searchHistory.length -1]);
     }
 }
 
