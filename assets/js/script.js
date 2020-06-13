@@ -29,7 +29,7 @@ var localIp = function () {
 
 localIp();
 
-function cityDisplay(cityName) {
+function cityDisplay(localIp) {
     const inputEl = document.getElementById("cityInput");
     const searchEl = document.getElementById("searchButton"); // need a search button ID
     const historyEl = document.getElementById("history");
