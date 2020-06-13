@@ -1,13 +1,18 @@
-
 .margin {
     margin: 2px;
 }
 
 .background-img {
     background-image: url("../images/james-wheeler-ZOA-cqKuJAA-unsplash.jpg");
+    object-fit: scale-down;
     width: auto;
-    height: 1580px;
-    background-position: center;
+    height: auto;
+    background-position: center top;
+}
+
+#container {
+    height: 350px;
+    margin: 100px;
 }
 /* submit button color */
 .btn {
@@ -35,3 +40,10 @@
     font-size: medium;
 } */
 
+.small-text {
+    font-size: 11px;
+}
+
+.width-100 {
+    width: 100%;
+}
