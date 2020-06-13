@@ -71,11 +71,11 @@ var getAirQuality = function(lat, lon){
     .then(function(response) {
         // request was successful
         if (response.ok) {
-        response.json().then(function(data) {
+          response.json().then(function(data) {
             console.log(data)
         });
         } else {
-        alert("Error: " + response.statusText);
+          alert("Error: " + response.statusText);
         }
     })
     .catch(function(error) {
