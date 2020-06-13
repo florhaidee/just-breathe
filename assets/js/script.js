@@ -28,33 +28,64 @@ var localIp = function () {
 
 localIp();
 
-function pageGenerate(cityName) {
-    const inputEl = document.getElementById("city-input");
-    const searchEl = document.getElementById("search-button");
+function cityDisplay(localIp) {
+    const inputEl = document.getElementById("cityInput");
+    const searchEl = document.getElementById("searchButton"); // need a search button ID
     const historyEl = document.getElementById("history");
-    const clearEl = document.getElementById("clear-history");
-    const cityEl = document.getElementById("city-name");
-    const pollenEl = document.getElementById("pollen");
+    const clearEl = document.getElementById("clear-history"); // need a clear history button if I am going to use this
+    const cityEl = document.getElementById("cityName");
+    const temperatureEl = document.getElementById("temp-display");
+    const pollenEl = document.getElementById("pc");
     
     // climacell API key
-    // const APIKey = "lvn6KyrmNhV8burwAPT5d50820IijJYY"
-
-    // AirVisual API key
-    const APIKey = "3aed9b70-9747-443a-9751-b784377b3b0d"
+    const APIKey = "lvn6KyrmNhV8burwAPT5d50820IijJYY"
+    // AirVisual API key const APIKey = "3aed9b70-9747-443a-9751-b784377b3b0d"
 
     // Stores searched city name
     let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
 
     function getAirQuality(cityName) {
-        // Gets API request from AirVisual 
-        let queryURL = `https://api.airvisual.com/v2/city?city=${cityName}&country=USA&key=${APIKey}`;
+        // API request
+        let lat = response.data.coord.lat;
+        let lon = response.data.coord.lon;
+        let queryURL = `https://api.climacell.co/v3/realtime/pollen_tree?lat=${lat}&lot=${lon}&key${APIKey}`;
         axios.get(queryURL)
 
-        // Display Pollen Count
-        pollenEl.innerHTML = "Pollen: " + response.data.pollen_tree;
+        .then(function(response){
+            // Display Temperature
+            temperatureEl.innerHTML = "Temperature: " + degree(response.data.main.temp) + " &#176F";
+            // Display Pollen Count
+            pollenEl.innerHTML = "Pollen: " + response.data/*SOMETHING*/;
+        })
+        .catch(function(error) {
+            alert("Unable to connect to server");
+        });
     };
+
+    // Search History
+    function renderSearchHistory() {
+        historyEl.innerHTML = "";
+        for (let i = 0; i < searchHistory.length; i++) {
+            const historyItem = document.createElement("input");
+            historyItem.setAttribute("type", "text");
+            historyItem.setAttribute("readonly", true);
+            historyItem.setAttribute("class", /*set CSS class attributes*/);
+            historyItem.setAttribute("value", searchHistory[i]);
+            historyItem.addEventListener("click", function() {
+                getAirQuality(historyItem.value);
+            })
+            historyEl.append(historyItem);
+        }
+    }
+
+    // Saves user's search history and displays them 
+    renderSearchHistory();
+    if (searchHistory.length > 0) {
+        getAirQuality(searchHistory[searchHistory.length -1]);
+    }
 }
-pageGenerate();
+
+cityDisplay ();
 
 
 //get air quality info receiving as parameters latitude and longitude
@@ -100,4 +131,3 @@ $( "#searchCity" ).keypress(function() {
 localIp();
 //use latitude and logitude to get air quality data
 getAirQuality(35.6914300,-100.6381900);
-
