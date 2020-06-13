@@ -35,6 +35,7 @@ function cityDisplay(cityName) {
     const historyEl = document.getElementById("history");
     const clearEl = document.getElementById("clear-history"); // need a clear history button if I am going to use this
     const cityEl = document.getElementById("cityName");
+    const temperatureEl = document.getElementById("temp-display");
     const pollenEl = document.getElementById("pc");
     
     // climacell API key
@@ -51,9 +52,11 @@ function cityDisplay(cityName) {
         let queryURL = `https://api.climacell.co/v3/realtime/pollen_tree?lat=${lat}&lot=${lon}&key${APIKey}`;
         axios.get(queryURL)
 
-        // Display Pollen Count
         .then(function(response){
-            pollenEl.innerHTML = "Pollen: " + response.data./*SOMETHING*/;
+            // Display Temperature
+            temperatureEl.innerHTML = "Temperature: " + degree(response.data.main.temp) + " &#176F";
+            // Display Pollen Count
+            pollenEl.innerHTML = "Pollen: " + response.data/*SOMETHING*/;
         })
         .catch(function(error) {
             alert("Unable to connect to server");
