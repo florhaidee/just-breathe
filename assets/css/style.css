@@ -5,9 +5,15 @@
 
 .background-img {
     background-image: url("../images/james-wheeler-ZOA-cqKuJAA-unsplash.jpg");
+    object-fit: scale-down;
     width: auto;
-    height: 1580px;
-    background-position: center;
+    height: auto;
+    background-position: center top;
+}
+
+#container {
+    height: 350px;
+    margin-top: 100px;
 }
 
 /*#header-title {
