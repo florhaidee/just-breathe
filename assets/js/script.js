@@ -59,6 +59,28 @@ function cityDisplay(cityName) {
             alert("Unable to connect to server");
         });
     };
+
+    // Search History
+    function renderSearchHistory() {
+        historyEl.innerHTML = "";
+        for (let i = 0; i < searchHistory.length; i++) {
+            const historyItem = document.createElement("input");
+            historyItem.setAttribute("type", "text");
+            historyItem.setAttribute("readonly", true);
+            historyItem.setAttribute("class", /*set CSS class attributes*/);
+            historyItem.setAttribute("value" searchHistory[i]);
+            historyItem.addEventListener("click", function() {
+                cityDisplay(historyItem.value);
+            })
+            historyEl.append(historyItem);
+        }
+    }
+
+    // Saves user's search history and displays them 
+    renderSearchHistory();
+    if (searchHistory.length > 0) {
+        cityDisplay(searchHistory[searchHistory.length -1]);
+    }
 }
 
 cityDisplay ();
