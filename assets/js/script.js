@@ -68,7 +68,7 @@ function cityDisplay(cityName) {
             historyItem.setAttribute("type", "text");
             historyItem.setAttribute("readonly", true);
             historyItem.setAttribute("class", /*set CSS class attributes*/);
-            historyItem.setAttribute("value" searchHistory[i]);
+            historyItem.setAttribute("value", searchHistory[i]);
             historyItem.addEventListener("click", function() {
                 getAirQuality(historyItem.value);
             })
