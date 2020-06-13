@@ -1,6 +1,7 @@
 var apiAQKey = 'afb80771-0c67-4a2e-a14c-1a274a7c0597'
 
-var searchCity = document.querySelector("#searchCity");
+var searchCityEl = document.querySelector("#searchCity");
+var submitBtnEl = document.querySelector("#submit-btn");
 
 //using visitors IP it looks up the city it belongs to
 var localIp = function () {
@@ -12,8 +13,7 @@ var localIp = function () {
             if (response.ok) {
                 //parse data for JSON payload
                 response.json()
-                    .then(function (data) {
-                        console.log(data);                        
+                    .then(function (data) {                                               
                         var lat = data.latitude
                         var long = data.longitude
                         //displays pollen count with the latitude and longitude from the JSON payload
@@ -28,6 +28,8 @@ var localIp = function () {
 //on page load grab users ip and parse data for latitude and longitude
 
 localIp();
+
+// Matt's work 
 
 function cityDisplay(localIp) {
     const inputEl = document.getElementById("cityInput");
@@ -88,6 +90,8 @@ function cityDisplay(localIp) {
 
 cityDisplay ();
 
+// end Matt's work
+
 
 //get air quality info receiving as parameters latitude and longitude
 var getAirQuality = function(lat, lon){
@@ -97,8 +101,7 @@ var getAirQuality = function(lat, lon){
         // request was successful
         if (response.ok) {
           response.json().then(function(data) {
-            console.log(data)
-        });
+            });
         } else {
           alert("Error: " + response.statusText);
         }
@@ -111,24 +114,22 @@ var getAirQuality = function(lat, lon){
 
 
 //on page load initialize modal
-$(document).ready(function(){
-    $
-});
+$(document).ready(function() {
+    $('.modal').modal();
+     });
 
 
 var buttonClickHandler = function(event) {
-
+    var city = event.value;
+    getAirQuality(city);
+    console.log(city);
+    pageGenerate(city);
+    console.log(city);
 }
 
-// captures city name when entered in input field
-$( "#searchCity" ).keypress(function() {
-    var city = document.getElementById("searchCity").value;
-    console.log(city);
-    // call Florha and Matt's functions with the value of the text button
-  });
-
-
-
+  submitBtnEl.addEventListener("click", function() {
+    buttonClickHandler(searchCityEl);
+}); 
 //on page load grab users ip and parse data for latitude and logitude
 localIp();
 //use latitude and logitude to get air quality data
