@@ -25,7 +25,13 @@ var localIp = function () {
             }
         })
 }
-//on page load grab users ip and parse data for latitude and longitude
+//display AQI on page
+var displayAQI = function(info){
+    var aqi= info.data.current.pollution.aqius;
+    $("#aq").text("Air Quality Index (AQI)= "+aqi);
+
+
+}
 
 localIp();
 
@@ -123,19 +129,29 @@ getAirQuality();
 
 //get air quality info receiving as parameters latitude and longitude
 var getAirQuality = function(lat, lon){
-    var apiUrl = `https://api.airvisual.com/v2/nearest_city?lat=${lat}&lot=${lon}&key=${apiAQKey}`
+    //API to get AQI of current location
+    //var apiUrl = `https://api.airvisual.com/v2/nearest_city?key=${apiAQKey}`
+    //API to get AQI data by city, state and country name
+    //var apiUrl = `https://api.airvisual.com/v2/city?city=Miami&state=florida&country=USA&key=${apiAQKey}`
+    //API to get AQI using coordinates
+    var apiUrl = `https://api.airvisual.com/v2/nearest_city?lat=${lat}&lon=${lon}&key=${apiAQKey}`
     fetch(apiUrl)
     .then(function(response) {
         // request was successful
         if (response.ok) {
           response.json().then(function(data) {
+
+            console.log(data)
+            displayAQI(data);
+        });
+
             });
+
         } else {
-          alert("Error: " + response.statusText);
+          alert("Error: City not found, Please try again");
         }
     })
     .catch(function(error) {
-        // Notice this `.catch()` getting chained onto the end of the `.then()` method
         alert("Unable to connect with server");
     });
 }
@@ -151,9 +167,13 @@ var buttonClickHandler = function(event) {
     var city = event.value;
     getAirQuality(city);
     console.log(city);
+
+    // call Florha and Matt's functions with the value of the text button
+
     pageGenerate(city);
     console.log(city);
 }
+
 
   submitBtnEl.addEventListener("click", function() {
     buttonClickHandler(searchCityEl);
@@ -161,4 +181,6 @@ var buttonClickHandler = function(event) {
 //on page load grab users ip and parse data for latitude and logitude
 localIp();
 //use latitude and logitude to get air quality data
+
 getAirQuality(35.6914300,-100.6381900);
+
