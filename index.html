@@ -11,22 +11,23 @@
 </head>
 
 <body class="white-text background-img">
-    <header>
-        <div class="row" id="header">
+    <header class="card transparent z-depth-3">
+        <div class="row valign-wrapper" id="header">
             <div class="col s4">
-                <div class="valign-wrapper">
-                    <h1 id="header-title">Just Breathe</h1>
+                <div>
+                    <h1 id="header-title">Just Breathe <i class=" medium material-icons">landscape</i></h1>
                 </div>
             </div>
             <div class="col s3 offset-s5">
-                <div class="valign-wrapper">
-                    <h1 id="temp-display">Temp</h1>
+                <div> 
+                    <!--<h1 id="temp-display"></h1>-->
                   <!--widget to display AQI-->
-                        <!-- <div name="airvisual_widget" key="9SzoEJ46s9XxF9Lhp"></div>-->
+                         <div name="airvisual_widget" key="9SzoEJ46s9XxF9Lhp"></div>
                 </div>
             </div>
         </div>
     </header>
+
     <div class="container">
         <main>
             <div class="row">
@@ -44,9 +45,7 @@
                 <div id="bottom-div">
                     <div class="col s4" id="search-container">
                         <div class="card transparent z-depth-3">
-                            <div id="searchHeader">Search for a new city:</div>
-                            <!--an unordered list will need to be dynamically created in history-->
-                            <div id="history">History</div>
+                            <div id="searchHeader">Search for a new city:</div>          
                             <div class="row">
                                 <div class="col s12 xl9">
                                     <label for="city"></label>
@@ -67,7 +66,7 @@
                     </div>
                 </div>
                 <div class="col s3 offset-s4 right" id="references">
-                    <a href="#aqi-modal" class="btn grey modal-trigger">Air Quality Index Reference</a>
+                    <a href="#aqi-modal" class="btn light-green lighten-1 modal-trigger">Air Quality Index Reference</a>
                 </div>
             </div>
             
