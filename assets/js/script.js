@@ -143,4 +143,6 @@ var buttonClickHandler = function(event) {
 //on page load grab users ip and parse data for latitude and logitude
 localIp();
 //use latitude and logitude to get air quality data
+
 getAirQuality(35.6914300,-100.6381900);
+
