@@ -117,8 +117,6 @@ var getAirQuality = function(lat, lon){
             displayAQI(data);
         });
 
-            });
-
         } else {
           alert("Error: City not found, Please try again");
         }
