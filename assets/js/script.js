@@ -40,34 +40,36 @@ const cityEl = document.getElementById("cityName");
 const temperatureEl = document.getElementById("temp-display");
 const pollenEl = document.getElementById("pc");
 
-// API Keys
+// API Key from Climacell
 const ClimaKey = "lvn6KyrmNhV8burwAPT5d50820IijJYY"
-const owmAPIKey = "e97f160d6822446df8eb4a687d7fb6ca"
 
 // Stores searched city name
 let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
 
 function getAirQuality(cityName) {
-    // API request
     //let lat = data.latitude;
     //let long = data.longitude;   
 
-    // // Display Temperature
-    // let tempQueryURL = `https://api.openweathermap.org/data/2.5/weather?lat=40.7608&lon=111.8910&appid=${owmAPIKey}`
-    // axios.get(tempQueryURL)
+    // Display Temperature
+    const tempField = "unit_system=us&fields=temp"
+    let tempQueryURL = `https://api.climacell.co/v3/weather/realtime?${tempField}&lat=40.7608&lon=111.891&apikey=lvn6KyrmNhV8burwAPT5d50820IijJYY`
+    axios.get(tempQueryURL)
 
-    // .then(function(response) {
-    //     temperatureEl.innerHTML = "Temperature: " + degree(response.data.main.temp) + " &#176F";
-    // })
+    .then(function(response) {
+        const tempEl = document.querySelectorAll("temp-display");
+        const cityTemperature = document.createElement("h1");
+        // cityTemperature.setAttribute("");
+        cityTemperature.innerHTML = response.data.temp.value + " &#176F";
+        temperatureEl.append(cityTemperature);
+    })
 
     // Display Pollen Count
-    let pollenFields = "pollen_tree,pollen_weed,pollen_grass";
-    let pollenQueryURL = `https://api.climacell.co/v3/weather/realtime?fields=pollen_tree,pollen_weed,pollen_grass&lat=40.7608&lon=111.8910&apikey=${ClimaKey}`
+    const pollenFields = "pollen_tree,pollen_weed,pollen_grass";
+    let pollenQueryURL = `https://api.climacell.co/v3/weather/realtime?fields=${pollenFields}&lat=40.7608&lon=111.891&apikey=${ClimaKey}`
 
-    /* Need to fix string array and working lat/lon to use this
+    /* Need working lat/lon to use this
     let pollenQueryURL = `https://api.climacell.co/v3/weather/realtime?fields=${pollenFields}&lat=${lat}&lon=${lon}&apikey=${APIKey}` */
-
-    axios.get(pollenQueryURL) 
+    axios.get(pollenQueryURL)
 
     .then(function(response) {
         const pollenCountEls = document.querySelectorAll(".pollen-count");
