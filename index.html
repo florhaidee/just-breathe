@@ -18,9 +18,9 @@
                     <h1 id="header-title">Just Breathe</h1>
                 </div>
             </div>
+            <!-- Temperature Display-->
             <div class="col s3 offset-s5">
-                <div class="valign-wrapper">
-                    <h1 id="temp-display">Temp</h1>
+                <div id="temp-display"class="valign-wrapper"></div>
                   <!--widget to display AQI-->
                         <!-- <div name="airvisual_widget" key="9SzoEJ46s9XxF9Lhp"></div>-->
                 </div>
@@ -36,7 +36,14 @@
                         <div id="cityName">City Placeholder</div>
                         <div id="date">Date Placeholder</div>
                         <div id="aq">Air Quality Index:</div>
-                        <div id="pc">Pollen Count:</div>
+                        <div id="pc">Pollen Count:
+                            <!-- Grass Pollen -->
+                            <div class="pollen-count"></div>
+                            <!-- Weed Pollen -->
+                            <div class="pollen-count"></div>
+                            <!-- Tree Pollen -->
+                            <div class="pollen-count"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -144,6 +151,7 @@
     </script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>

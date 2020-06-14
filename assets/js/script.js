@@ -15,6 +15,9 @@ const pollenEl = document.getElementById("pc");
 // Stores searched city name
 let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
 
+// used jquery to target the input's id.
+var cityNameEl = $("#searchCity");
+
 //using visitors IP it looks up the city it belongs to
 var localIp = function () {
     getUserIp = "https://json.geoiplookup.io/"
@@ -150,6 +153,70 @@ var getAirQuality = function(lat, lon){
         alert("Unable to connect with server");
     });
 }
+// getAirQuality()
+// Matt's work 
+
+// function cityDisplay(localIp) {
+//     const inputEl = document.getElementById("cityInput");
+//     const searchEl = document.getElementById("searchButton"); // need a search button ID
+//     const historyEl = document.getElementById("history");
+//     const clearEl = document.getElementById("clear-history"); // need a clear history button if I am going to use this
+//     const cityEl = document.getElementById("cityName");
+//     const temperatureEl = document.getElementById("temp-display");
+//     const pollenEl = document.getElementById("pc");
+    
+//     // climacell API key
+//     const APIKey = "lvn6KyrmNhV8burwAPT5d50820IijJYY"
+//     // AirVisual API key const APIKey = "3aed9b70-9747-443a-9751-b784377b3b0d"
+
+//     // Stores searched city name
+//     let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
+
+//     function getPollenCount(cityName) {
+//         // API request
+//         let lat = response.data.coord.lat;
+//         let lon = response.data.coord.lon;
+//         let queryURL = `https://api.climacell.co/v3/realtime/pollen_tree?lat=${lat}&lon=${lon}&key${APIKey}`;
+//         axios.get(queryURL)
+
+//         .then(function(response){
+//             // Display Temperature
+//             temperatureEl.innerHTML = "Temperature: " + degree(response.data.main.temp) + " &#176F";
+//             // Display Pollen Count
+//             pollenEl.innerHTML = "Pollen: " + response.data/*SOMETHING*/;
+//         })
+//         .catch(function(error) {
+//             alert("Unable to connect to server");
+//         });
+//     };
+
+//     // Search History
+//     function renderSearchHistory() {
+//         historyEl.innerHTML = "";
+//         for (let i = 0; i < searchHistory.length; i++) {
+//             const historyItem = document.createElement("input");
+//             historyItem.setAttribute("type", "text");
+//             historyItem.setAttribute("readonly", true);
+//             historyItem.setAttribute("class", /*set CSS class attributes*/);
+//             historyItem.setAttribute("value", searchHistory[i]);
+//             historyItem.addEventListener("click", function() {
+//                 getAirQuality(historyItem.value);
+//             })
+//             historyEl.append(historyItem);
+//         }
+//     }
+
+//     // Saves user's search history and displays them 
+//     renderSearchHistory();
+//     if (searchHistory.length > 0) {
+//         getAirQuality(searchHistory[searchHistory.length -1]);
+//     }
+// }
+
+// cityDisplay ();
+
+// end Matt's work
+
 
 
 //on page load initialize modal
