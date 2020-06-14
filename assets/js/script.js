@@ -30,15 +30,7 @@ var localIp = function () {
                 response.json()
                     .then(function (data) {                                               
                         var lat = data.latitude
-<<<<<<< HEAD
-                        // for consistency Phil said to drop the g. 
                         var lon = data.longitude
-
-                        console.log("localip", lat, lon)
-                        getAirQuality(lat, lon)
-=======
-                        var lon = data.longitude
->>>>>>> master
                         //displays pollen count with the latitude and longitude from the JSON payload
                         getAirQuality(lat, lon);
                         getPollenCount(lat, lon)
@@ -56,14 +48,6 @@ var displayAQI = function(info){
 
 
 
-<<<<<<< HEAD
-
-//get air quality info receiving as parameters latitude and longitude
-var getAirQuality = function(lat, lon){
-
-    var apiUrl = `https://api.airvisual.com/v2/nearest_city?lat=${lat}&lon=${lon}&key=${apiAQKey}`
-    console.log(apiUrl);
-=======
 // Matt's work 
 
 function getPollenCount(lat, lon) {
@@ -145,25 +129,10 @@ getPollenCount();
 var getAirQuality = function(lat, lon){
     //API to get AQI using coordinates
     var apiUrl = `https://api.airvisual.com/v2/nearest_city?lat=${lat}&lon=${lon}&key=${apiAQKey}`
->>>>>>> master
     fetch(apiUrl)
     .then(function(response) {
         // request was successful
         if (response.ok) {
-<<<<<<< HEAD
-            response.json().then(function(results) {
-                // this if statement will display the current city location using the localIp function
-                if (cityNameEl.val().length === 0) {
-                    $('#cityName').html("City: " + results.data.city)
-                }
-                // this will display the entered value in the input field
-                else {
-                    $('#cityName').html("City: " + cityNameEl.val())
-                }
-            
-              console.log("Air Quality", results.data);
-            });
-=======
           response.json().then(function(data) {
               if (searchCityEl.value.length === 0) {
                     cityEl.innerHTML = "City: " + data.data.city;
@@ -176,7 +145,6 @@ var getAirQuality = function(lat, lon){
               console.log("Air Quality", data.data);
             displayAQI(data);
         });
->>>>>>> master
         } else {
           alert("Error: City not found, Please try again");
         }
@@ -259,33 +227,18 @@ $(document).ready(function() {
 
 var buttonClickHandler = function(event) {
     var city = event.value;
-<<<<<<< HEAD
-
-    // Phil suggested some changes here. We used the Open Weather API to get the current lat and lon and then fed that into the getAirQuality function.
-    // WE can use another API if you all want. 
-=======
     
->>>>>>> master
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=65fd11245a646ac22c447bd4432d911d`).then(function(response) {
         return response.json()
     }).then(function(results){
         console.log(results.coord.lat,results.coord.lon )
         getAirQuality(results.coord.lat,results.coord.lon);
-<<<<<<< HEAD
-
-    })
-
-     
-
-    console.log(city);
-=======
         getPollenCount(results.coord.lat,results.coord.lon);
 
     })
   
     // call Florha and Matt's functions with the value of the text button
 
->>>>>>> master
     //pageGenerate(city);
     console.log(city);
 }
@@ -296,8 +249,4 @@ var buttonClickHandler = function(event) {
 }); 
 //on page load grab users ip and parse data for latitude and logitude
 localIp();
-<<<<<<< HEAD
 //use latitude and logitude to get air quality data
-=======
-//use latitude and logitude to get air quality data
->>>>>>> master
