@@ -37,64 +37,92 @@ localIp();
 
 // Matt's work 
 
-function cityDisplay(localIp) {
-    const inputEl = document.getElementById("cityInput");
-    const searchEl = document.getElementById("searchButton"); // need a search button ID
-    const historyEl = document.getElementById("history");
-    const clearEl = document.getElementById("clear-history"); // need a clear history button if I am going to use this
-    const cityEl = document.getElementById("cityName");
-    const temperatureEl = document.getElementById("temp-display");
-    const pollenEl = document.getElementById("pc");
-    
-    // climacell API key
-    const APIKey = "lvn6KyrmNhV8burwAPT5d50820IijJYY"
-    // AirVisual API key const APIKey = "3aed9b70-9747-443a-9751-b784377b3b0d"
 
-    // Stores searched city name
-    let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
+const inputEl = document.getElementById("cityInput");
+const searchEl = document.getElementById("searchButton"); // need a search button ID
+const historyEl = document.getElementById("history");
+const clearEl = document.getElementById("clear-history"); // need a clear history button if I am going to use this
+const cityEl = document.getElementById("cityName");
+const temperatureEl = document.getElementById("temp-display");
+const pollenEl = document.getElementById("pc");
 
-    function getAirQuality(cityName) {
-        // API request
-        let lat = response.data.coord.lat;
-        let lon = response.data.coord.lon;
-        let queryURL = `https://api.climacell.co/v3/realtime/pollen_tree?lat=${lat}&lot=${lon}&key${APIKey}`;
-        axios.get(queryURL)
+// API Key from Climacell
+const ClimaKey = "lvn6KyrmNhV8burwAPT5d50820IijJYY"
 
-        .then(function(response){
-            // Display Temperature
-            temperatureEl.innerHTML = "Temperature: " + degree(response.data.main.temp) + " &#176F";
-            // Display Pollen Count
-            pollenEl.innerHTML = "Pollen: " + response.data/*SOMETHING*/;
-        })
-        .catch(function(error) {
-            alert("Unable to connect to server");
-        });
-    };
+// Stores searched city name
+let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
 
-    // Search History
-    function renderSearchHistory() {
-        historyEl.innerHTML = "";
-        for (let i = 0; i < searchHistory.length; i++) {
-            const historyItem = document.createElement("input");
-            historyItem.setAttribute("type", "text");
-            historyItem.setAttribute("readonly", true);
-            historyItem.setAttribute("class", /*set CSS class attributes*/);
-            historyItem.setAttribute("value", searchHistory[i]);
-            historyItem.addEventListener("click", function() {
-                getAirQuality(historyItem.value);
-            })
-            historyEl.append(historyItem);
-        }
-    }
+function getAirQuality(cityName) {
+    //let lat = data.latitude;
+    //let long = data.longitude;   
 
-    // Saves user's search history and displays them 
-    renderSearchHistory();
-    if (searchHistory.length > 0) {
-        getAirQuality(searchHistory[searchHistory.length -1]);
-    }
-}
+    // Display Temperature
+    const tempField = "unit_system=us&fields=temp"
+    let tempQueryURL = `https://api.climacell.co/v3/weather/realtime?${tempField}&lat=40.7608&lon=111.891&apikey=lvn6KyrmNhV8burwAPT5d50820IijJYY`
+    axios.get(tempQueryURL)
 
-cityDisplay ();
+    .then(function(response) {
+        const tempEl = document.querySelectorAll("temp-display");
+        const cityTemperature = document.createElement("h1");
+        // cityTemperature.setAttribute("");
+        cityTemperature.innerHTML = response.data.temp.value + " &#176F";
+        temperatureEl.append(cityTemperature);
+    })
+
+    // Display Pollen Count
+    const pollenFields = "pollen_tree,pollen_weed,pollen_grass";
+    let pollenQueryURL = `https://api.climacell.co/v3/weather/realtime?fields=${pollenFields}&lat=40.7608&lon=111.891&apikey=${ClimaKey}`
+
+    /* Need working lat/lon to use this
+    let pollenQueryURL = `https://api.climacell.co/v3/weather/realtime?fields=${pollenFields}&lat=${lat}&lon=${lon}&apikey=${APIKey}` */
+    axios.get(pollenQueryURL)
+
+    .then(function(response) {
+        const pollenCountEls = document.querySelectorAll(".pollen-count");
+
+        // Grass Pollen Count
+        const grassPollenCount = document.createElement("p");
+        // grassPollenCount.setAttribute("");
+        grassPollenCount.innerHTML = "Grass Index: " + response.data.pollen_grass.value;
+        pollenEl.append(grassPollenCount);
+
+        // Weed Pollen Count
+        const weedPollenCount = document.createElement("p");
+        // grassPollenCount.setAttribute("");
+        weedPollenCount.innerHTML = "Weed Index: " + response.data.pollen_weed.value;
+        pollenEl.append(weedPollenCount);
+
+        // Tree Pollen Count
+        const treePollenCount = document.createElement("p");
+        // treePollenCount.setAttribute("");
+        treePollenCount.innerHTML = "Tree Index: " + response.data.pollen_tree.value;
+        pollenEl.append(treePollenCount);
+    })
+};
+
+getAirQuality();
+
+// Search History
+// function renderSearchHistory() {
+//     historyEl.innerHTML = "";
+//     for (let i = 0; i < searchHistory.length; i++) {
+//         const historyItem = document.createElement("input");
+//         historyItem.setAttribute("type", "text");
+//         historyItem.setAttribute("readonly", true);
+//         historyItem.setAttribute("class", /*PLACEHOLDER to set CSS class attributes*/);
+//         historyItem.setAttribute("value", searchHistory[i]);
+//         historyItem.addEventListener("click", function() {
+//             getAirQuality(historyItem.value);
+//         })
+//         historyEl.append(historyItem);
+//     }
+// }
+
+// // Saves user's search history and displays them 
+// renderSearchHistory();
+// if (searchHistory.length > 0) {
+//     getAirQuality(searchHistory[searchHistory.length -1]);
+// }
 
 // end Matt's work
 
