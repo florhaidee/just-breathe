@@ -12,63 +12,58 @@
 
 <body class="white-text background-img">
     <header class="card transparent z-depth-3">
-        <div class="row valign-wrapper" id="header">
-            <div class="col s4">
-                <div>
-                    <h1 id="header-title">Just Breathe <i class=" medium material-icons">landscape</i></h1>
-                </div>
-            </div>
-            <div class="col s3 offset-s5">
-                <div> 
-                    <!--<h1 id="temp-display"></h1>-->
-                  <!--widget to display AQI-->
-                         <div name="airvisual_widget" key="9SzoEJ46s9XxF9Lhp"></div>
-                </div>
+        <div class="row" id="header">
+            <div class="col s12 l6"><h1 class="center-align">Just Breathe <i class=" medium material-icons">landscape</i></h1></div>
+            <div class="col s12 l3 offset-l3">
+                <!--<h1 id="temp-display"></h1>-->
+                <!--widget to display AQI-->
+                 <div class="center-align" name="airvisual_widget" key="9SzoEJ46s9XxF9Lhp"></div>
             </div>
         </div>
     </header>
 
-    <div class="container">
+    
         <main>
-            <div class="row">
-                <div class="col s6 offset-s3">
-                    <div class="card transparent center z-depth-5" id="container">
-                        <!--this information will need to be dynamically inserted into these divs-->
-                        <div id="cityName">City Placeholder</div>
-                        <div id="date">Date Placeholder</div>
-                        <div id="aq">Air Quality Index:</div>
-                        <div id="pc">Pollen Count:</div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div id="bottom-div">
-                    <div class="col s4" id="search-container">
-                        <div class="card transparent z-depth-3">
-                            <div id="searchHeader">Search for a new city:</div>          
-                            <div class="row">
-                                <div class="col s12 xl9">
-                                    <label for="city"></label>
-                                    <input type="text" name="cityInput" id="searchCity" class="white-text" />
-                                </div>
-                                <div class="col s3">
-                                    <button class="btn waves-effect light-green lighten-1" type="submit" name="action" id="submit-btn">
-                                        <i class=" small material-icons">search</i>
-                                    </button>
-                                </div>
-                            </div>
-                            <!--an unordered list will need to be dynamically created in history-list-->
-                            <div id="history-container">
-                                <div id="history-title">History:</div>
-                                <div id="history-list"></div>
-                            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 l8 offset-l2">
+                        <div class="card transparent center z-depth-5" id="container">
+                            <!--this information will need to be dynamically inserted into these divs-->
+                            <div id="cityName">City Placeholder</div>
+                            <div id="date">Date Placeholder</div>
+                            <div id="aq">Air Quality Index:</div>
+                            <div id="pc">Pollen Count:</div>
                         </div>
                     </div>
                 </div>
-                <div class="col s3 offset-s4 right" id="references">
+                <div class="row">
+                    <div id="bottom-div">
+                        <div class="col s12 m6 l6" id="search-container">
+                            <div class="card transparent z-depth-3">
+                                <div id="searchHeader">Search for a new city:</div>          
+                                <div class="row">
+                                    <div class="col s12 xl9">
+                                        <label for="city"></label>
+                                        <input type="text" name="cityInput" id="searchCity" class="white-text" />
+                                    </div>
+                                    <div class="col s12 l3">
+                                        <button class="btn waves-effect light-green lighten-1" type="submit" name="action" id="submit-btn">
+                                            <i class=" small material-icons">search</i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--an unordered list will need to be dynamically created in history-list-->
+                                <div id="history-container">
+                                    <div id="history-title">History:</div>
+                                    <div id="history-list"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l5 offset-l1 " id="references">
                     <a href="#aqi-modal" class="btn light-green lighten-1 modal-trigger">Air Quality Index Reference</a>
+                    </div>
                 </div>
-            </div>
             
                 <!-- Modal for AQI begin  -->
                 <div class="modal" id="aqi-modal">
@@ -132,9 +127,9 @@
                      </div>
                  </div>
                  <!-- Modal for AQI end -->
-                 
+            </div>    
         </main>
-    </div>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.airvisual.com/scripts/widget_v2.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
