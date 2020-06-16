@@ -19,6 +19,10 @@
     background-color: grey;
 }
 
+/* modal reference buttons */
+.ref {
+    margin-top: 2px;
+}
 /*#header-title {
     font-size: medium;
 }
