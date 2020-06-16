@@ -55,3 +55,8 @@
 #aqi-ref {
     width: 250px;
 }
+/* Air Quality Index Style*/
+#aq span {
+    padding: 0.2rem;
+    border-radius: 25%;
+}

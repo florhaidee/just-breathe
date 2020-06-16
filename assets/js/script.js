@@ -40,8 +40,21 @@ var localIp = function () {
 
 //display AQI on page
 var displayAQI = function (info) {
+    $("#aq span").remove();
     var aqi = info.data.current.pollution.aqius;
-    $("#aq").text("Air Quality Index: " + aqi);
+    if(aqi <=50.99){
+        $("#aq").append(`<span class ='new-badge green'> ${aqi} <i class=" tiny material-icons">thumb_up</i></span>`);
+    }else if (aqi <=100.99){
+        $("#aq").append(`<span class ='new-badge yellow'> ${aqi} <i class=" tiny material-icons">info</i></span>`);          
+    }else if(aqi <=150.99){
+        $("#aq").append(`<span class ='new-badge orange'> ${aqi} <i class=" tiny material-icons">info</i></span>`);
+    }else if (aqi <=200.99){
+       $("#aq").append(`<span class ='new-badge red'> ${aqi} <i class=" tiny material-icons">warning</i></span>`);
+    }else if (aqi <=300.99){
+        $("#aq").append(`<span class ='new-badge purple'> ${aqi} <i class=" tiny material-icons">warning</i></span>`);
+    }else if(aqi <=500){
+        $("#aq").append(`<span class ='new-badge maroon'> ${aqi} <i class=" tiny material-icons">warning</i></span>`);
+    }
 }
 
 // Matt's work 
