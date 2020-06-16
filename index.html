@@ -20,10 +20,9 @@
             </div>
             <!-- Temperature Display-->
             <div class="col s3 offset-s5">
-                <div id="temp-display"class="valign-wrapper"></div>
-                  <!--widget to display AQI-->
-                        <!-- <div name="airvisual_widget" key="9SzoEJ46s9XxF9Lhp"></div>-->
-                </div>
+                <div id="temp-display" class="valign-wrapper"></div>
+                <!--widget to display AQI-->
+                <!-- <div name="airvisual_widget" key="9SzoEJ46s9XxF9Lhp"></div>-->
             </div>
         </div>
     </header>
@@ -36,13 +35,9 @@
                         <div id="cityName">City Placeholder</div>
                         <div id="date">Date Placeholder</div>
                         <div id="aq">Air Quality Index:</div>
-                        <div id="pc">Pollen Count:
-                            <!-- Grass Pollen -->
-                            <div class="pollen-count"></div>
-                            <!-- Weed Pollen -->
-                            <div class="pollen-count"></div>
-                            <!-- Tree Pollen -->
-                            <div class="pollen-count"></div>
+                        <div>Pollen Information:</div>
+                        <div id="pc">
+                            <!-- dynamically generated pollen info goes here -->
                         </div>
                     </div>
                 </div>
@@ -60,7 +55,8 @@
                                     <input type="text" name="cityInput" id="searchCity" class="white-text" />
                                 </div>
                                 <div class="col s3">
-                                    <button class="btn waves-effect light-green lighten-1" type="submit" name="action" id="submit-btn">
+                                    <button class="btn waves-effect light-green lighten-1" type="submit" name="action"
+                                        id="submit-btn">
                                         <i class=" small material-icons">search</i>
                                     </button>
                                 </div>
@@ -74,73 +70,74 @@
                     </div>
                 </div>
                 <div class="col s3 offset-s4 right" id="references">
-                    <a href="#aqi-modal" class="btn grey modal-trigger">Air Quality Index Reference</a>
+                    <a href="#aqi-modal" class="btn grey modal-trigger small-text" id="aqi-ref">Air Quality Index
+                        Reference</a>
                 </div>
             </div>
-            
-                <!-- Modal for AQI begin  -->
-                <div class="modal" id="aqi-modal">
-                    <div class="container small-text width-100" id="air-table">
-                         <!-- Top info -->
-                         <div class="row margin grey left-align">
-                             <div class="col s1">Value</div>
-                             <div class="col s2">Color</div>
-                             <div class="col s3">Level of Health concern</div>
-                             <div class="col s6">Meaning</div>
-                         </div>
-                         <!-- Good  -->
-                         <div class="row margin green left-align">
-                             <div class="col s1">0-50</div>
-                             <div class="col s2">Green</div>
-                             <div class="col s3">Good</div>
-                             <div class="col s6">Air Quality is considered satisfactory, and air
-                                 pollution poses little to no risk</div>
-                         </div>
-                         <!-- Moderate -->
-                         <div class="row margin yellow left-align">
-                             <div class="col s1">51-100</div>
-                             <div class="col s2">Yellow</div>
-                             <div class="col s3">Moderate</div>
-                             <div class="col s6">Air Quality is acceptable; however, for some
-                                 pollutants there may be a moderate health concern for a small number of people
-                                 who are unusually sensitive to air pollution.</div>
-                         </div>
-                         <!-- Unhealthy for sensitive groups -->
-                         <div class="row margin orange left-align">
-                             <div class="col s1">101-150</div>
-                             <div class="col s2">Orange</div>
-                             <div class="col s3">Unhealth for sensitive groups</div>
-                             <div class="col s6">Members of sensitive groups may experience health
-                                 effects. The general public is not likely to be affected.</div>
-                         </div>
-                         <!-- Unhealty -->
-                         <div class="row margin red left-align">
-                             <div class="col s1">151-200</div>
-                             <div class="col s2">Red</div>
-                             <div class="col s3">Unhealthy</div>
-                             <div class="col s6">Everyone may begin to experience health effects;
-                                 members of sensitive groups may experience more serious health effects</div>
-                         </div>
-                         <!-- Very unhealty -->
-                         <div class="row margin purple left-align">
-                             <div class="col s1">201-300</div>
-                             <div class="col s2">Purple</div>
-                             <div class="col s3">Very Unhealthy</div>
-                             <div class="col s6">Health Alert: everyone may experience more serious
-                                 health effects.</div>
-                         </div>
-                         <!-- Hazardous -->
-                         <div class="row margin red darken-4 left-align">
-                             <div class="col s1">301-500</div>
-                             <div class="col s2">Maroon</div>
-                             <div class="col s3">Hazardous</div>
-                             <div class="col s6">Health warnings of emergency conditions. The entire
-                                 population is more likely to be affected.</div>
-                         </div>
-                     </div>
-                 </div>
-                 <!-- Modal for AQI end -->
-                 
+
+            <!-- Modal for AQI begin  -->
+            <div class="modal" id="aqi-modal">
+                <div class="container width-100" id="air-table">
+                    <!-- Top info -->
+                    <div class="row margin grey left-align">
+                        <div class="col s1">Value</div>
+                        <div class="col s2">Color</div>
+                        <div class="col s3">Level of Health concern</div>
+                        <div class="col s6">Meaning</div>
+                    </div>
+                    <!-- Good  -->
+                    <div class="row margin green left-align">
+                        <div class="col s1">0-50</div>
+                        <div class="col s2">Green</div>
+                        <div class="col s3">Good</div>
+                        <div class="col s6">Air Quality is considered satisfactory, and air
+                            pollution poses little to no risk</div>
+                    </div>
+                    <!-- Moderate -->
+                    <div class="row margin yellow left-align black-text">
+                        <div class="col s1">51-100</div>
+                        <div class="col s2">Yellow</div>
+                        <div class="col s3">Moderate</div>
+                        <div class="col s6">Air Quality is acceptable; however, for some
+                            pollutants there may be a moderate health concern for a small number of people
+                            who are unusually sensitive to air pollution.</div>
+                    </div>
+                    <!-- Unhealthy for sensitive groups -->
+                    <div class="row margin orange left-align">
+                        <div class="col s1">101-150</div>
+                        <div class="col s2">Orange</div>
+                        <div class="col s3">Unhealth for sensitive groups</div>
+                        <div class="col s6">Members of sensitive groups may experience health
+                            effects. The general public is not likely to be affected.</div>
+                    </div>
+                    <!-- Unhealty -->
+                    <div class="row margin red left-align">
+                        <div class="col s1">151-200</div>
+                        <div class="col s2">Red</div>
+                        <div class="col s3">Unhealthy</div>
+                        <div class="col s6">Everyone may begin to experience health effects;
+                            members of sensitive groups may experience more serious health effects</div>
+                    </div>
+                    <!-- Very unhealty -->
+                    <div class="row margin purple left-align">
+                        <div class="col s1">201-300</div>
+                        <div class="col s2">Purple</div>
+                        <div class="col s3">Very Unhealthy</div>
+                        <div class="col s6">Health Alert: everyone may experience more serious
+                            health effects.</div>
+                    </div>
+                    <!-- Hazardous -->
+                    <div class="row margin red darken-4 left-align">
+                        <div class="col s1">301-500</div>
+                        <div class="col s2">Maroon</div>
+                        <div class="col s3">Hazardous</div>
+                        <div class="col s6">Health warnings of emergency conditions. The entire
+                            population is more likely to be affected.</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal for AQI end -->
+
         </main>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -153,4 +150,5 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
