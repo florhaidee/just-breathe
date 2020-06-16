@@ -22,6 +22,7 @@
 /* modal reference buttons */
 .ref {
     margin-top: 2px;
+    width: 250px;
 }
 /*#header-title {
     font-size: medium;
@@ -52,6 +53,3 @@
     width: 100%;
 }
 
-#aqi-ref {
-    width: 250px;
-}
