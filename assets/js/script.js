@@ -10,6 +10,7 @@ const clearEl = document.getElementById("clear-history"); // need a clear histor
 const cityEl = document.getElementById("cityName");
 const temperatureEl = document.getElementById("temp-display");
 const pollenEl = document.getElementById("pc");
+var mainEl = document.querySelector("#body")
 
 //changes date to today's day
 $("#date").text(moment().format('MMMM Do, YYYY'));
@@ -33,7 +34,7 @@ var localIp = function () {
                         getPollenCount(lat, lon)
                     })
             } else {
-                alert("Error: " + response.statusText);
+                alert("Error: " + response.statusText);          
             }
         })
 }
@@ -147,14 +148,34 @@ $(document).ready(function () {
 var buttonClickHandler = function (event) {
     var city = event.value;
 
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=65fd11245a646ac22c447bd4432d911d`).then(function (response) {
-        return response.json()
-    }).then(function (results) {
-        console.log(results);
-        console.log(results.coord.lat, results.coord.lon)
-        getAirQuality(results.coord.lat, results.coord.lon);
-        getPollenCount(results.coord.lat,results.coord.lon);
-    })
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=65fd11245a646ac22c447bd4432d911d`)
+        .then(function (response) {
+            if (response.ok) {
+                response.json()
+                    .then(function (results) {
+                        console.log(results);
+                        console.log(results.coord.lat, results.coord.lon)
+                        getAirQuality(results.coord.lat, results.coord.lon);
+                        getPollenCount(results.coord.lat, results.coord.lon);
+                    })
+            } else {
+                var errorModalContainer = document.createElement("div");
+                errorModalContainer.setAttribute("class", "modal");
+                errorModalContainer.setAttribute("id", "city-error");
+
+                mainEl.appendChild(errorModalContainer);
+
+                var errorModal = document.createElement("div");
+                errorModal.setAttribute("class", "modal-content red-text center-align");
+                errorModal.innerText = (response.statusText + " Please Try Another City")
+
+                errorModalContainer.appendChild(errorModal)
+
+                var errorInstance = M.Modal.init(errorModalContainer);
+
+                errorInstance.open();
+            };
+        });
 
     // call Florha and Matt's functions with the value of the text button
     //pageGenerate(city);

@@ -51,3 +51,8 @@
 #aqi-ref {
     width: 250px;
 }
+
+#city-error {
+    font-size: 25px;
+    font-weight: bold;
+}
