@@ -1,12 +1,12 @@
+// API Keys
 var apiAQKey = 'afb80771-0c67-4a2e-a14c-1a274a7c0597'
-// API Key from Climacell
 const ClimaKey = "3X1a6FbacRvPShNS2gvctGSUfYkogDkv"
+
 var searchCityEl = document.querySelector("#searchCity");
 var submitBtnEl = document.querySelector("#submit-btn");
 const inputEl = document.getElementById("cityInput");
-const searchEl = document.getElementById("searchButton"); // need a search button ID
-const historyEl = document.getElementById("history");
-const clearEl = document.getElementById("clear-history"); // need a clear history button if I am going to use this
+const historyEl = document.getElementById("history-container");
+const clearEl = document.getElementById("clear-history");
 const cityEl = document.getElementById("cityName");
 const temperatureEl = document.getElementById("temp-display");
 const pollenEl = document.getElementById("pc");
@@ -134,28 +134,6 @@ function getPollenCount(lat, lon) {
             pollenEl.append(treePollenCount);
         })
 };
-
-// Search History
-function renderSearchHistory() {
-    historyEl.innerHTML = "";
-    for (let i = 0; i < searchHistory.length; i++) {
-        const historyItem = document.createElement("input");
-        historyItem.setAttribute("type", "text");
-        historyItem.setAttribute("readonly", true);
-        historyItem.setAttribute("class", /*PLACEHOLDER to set CSS class attributes*/ );
-        historyItem.setAttribute("value", searchHistory[i]);
-        historyItem.addEventListener("click", function () {
-            getAirQuality(historyItem.value);
-        })
-        historyEl.append(historyItem);
-    }
-}
-
-//Saves user's search history and displays them 
-renderSearchHistory();
-if (searchHistory.length > 0) {
-    getAirQuality(searchHistory[searchHistory.length - 1]);
-}
 //end Matt's work
 
 //get air quality info receiving as parameters latitude and longitude
@@ -249,7 +227,10 @@ var buttonClickHandler = function (event) {
                 errorInstance.open();
             };
         });
-
+    
+    searchHistory.push(city);
+    localStorage.setItem("search",JSON.stringify(searchHistory));
+    renderSearchHistory();
     
     //pageGenerate(city);
     searchCityEl.value = "";
@@ -258,6 +239,34 @@ var buttonClickHandler = function (event) {
 submitBtnEl.addEventListener("click", function () {
     buttonClickHandler(searchCityEl);
 });
+
+// Clear Search History
+clearEl.addEventListener("click",function() {
+    searchHistory = [];
+    renderSearchHistory();
+})
+
+// Search History
+function renderSearchHistory() {
+    historyEl.innerHTML = "";
+
+    for (let i = 0; i < searchHistory.length; i++) {
+        const historyItem = document.createElement("li");
+        const historyBtnEl = document.createElement("button")
+
+        historyItem.setAttribute("class", "white-text");
+        historyItem.textContent = searchHistory[i];
+        historyEl.appendChild(historyItem);
+
+        historyBtnEl.addEventListener("click", buttonClickHandler.bind(null, searchHistory[i]));
+    }
+}
+
+//Saves user's search history and displays them 
+renderSearchHistory();
+if (searchHistory.length > 0) {
+    buttonClickHandler();
+}
 
 //on page load grab users ip and parse data for latitude and logitude
 localIp();
