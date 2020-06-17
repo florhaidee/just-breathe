@@ -200,7 +200,7 @@ $(document).ready(function () {
 
 var buttonClickHandler = function (event) {
     var city = event.value;
-
+    if (city) {
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=65fd11245a646ac22c447bd4432d911d`)
         .then(function (response) {
             if (response.ok) {
@@ -227,7 +227,7 @@ var buttonClickHandler = function (event) {
                 errorInstance.open();
             };
         });
-    
+    };
     searchHistory.push(city);
     localStorage.setItem("search",JSON.stringify(searchHistory));
     renderSearchHistory();
@@ -263,9 +263,9 @@ function renderSearchHistory() {
 }
 
 //Saves user's search history and displays them 
-renderSearchHistory();
+
 if (searchHistory.length > 0) {
-    buttonClickHandler();
+    renderSearchHistory();
 }
 
 //on page load grab users ip and parse data for latitude and logitude
