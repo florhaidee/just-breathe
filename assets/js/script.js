@@ -197,41 +197,61 @@ var getAirQuality = function (lat, lon) {
 $(document).ready(function () {
     $('.modal').modal();
 });
-
+// prevent duplicate searches from being saved in localstorage
+var preventDuplicate = function (name) {
+    var i=0;
+    while(i<searchHistory.length){
+        console.log(searchHistory[i], name)
+        if(searchHistory[i].toUpperCase() === name.toUpperCase()){ 
+            return true; 
+        }
+        i++
+    }
+    return false;
+}
 var buttonClickHandler = function (event) {
     var city = event.value;
     if (city) {
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=65fd11245a646ac22c447bd4432d911d`)
-        .then(function (response) {
-            if (response.ok) {
-                response.json()
-                    .then(function (results) {
-                        getAirQuality(results.coord.lat, results.coord.lon);
-                        getPollenCount(results.coord.lat, results.coord.lon);
-                    })
-            } else {
-                var errorModalContainer = document.createElement("div");
-                errorModalContainer.setAttribute("class", "modal modal-error");
-                errorModalContainer.setAttribute("id", "city-error");
+        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=65fd11245a646ac22c447bd4432d911d`)
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (results) {
+                            getAirQuality(results.coord.lat, results.coord.lon);
+                            getPollenCount(results.coord.lat, results.coord.lon);
+                        })
+                } else {
+                    var errorModalContainer = document.createElement("div");
+                    errorModalContainer.setAttribute("class", "modal modal-error");
+                    errorModalContainer.setAttribute("id", "city-error");
 
-                mainEl.appendChild(errorModalContainer);
+                    mainEl.appendChild(errorModalContainer);
 
-                var errorModal = document.createElement("div");
-                errorModal.setAttribute("class", "modal-content red-text center-align");
-                errorModal.innerText = (response.statusText + " Please Try Another City")
+                    var errorModal = document.createElement("div");
+                    errorModal.setAttribute("class", "modal-content red-text center-align");
+                    errorModal.innerText = (response.statusText + " Please Try Another City")
 
-                errorModalContainer.appendChild(errorModal)
+                    errorModalContainer.appendChild(errorModal)
 
-                var errorInstance = M.Modal.init(errorModalContainer);
+                    var errorInstance = M.Modal.init(errorModalContainer);
 
-                errorInstance.open();
-            };
-        });
-    };
-    searchHistory.push(city);
-    localStorage.setItem("search",JSON.stringify(searchHistory));
-    renderSearchHistory();
-    
+                    errorInstance.open();
+                };
+            });
+        //save and display user's search history
+        if (searchHistory.length > 0) {
+            var validate = preventDuplicate(city)
+            if( validate === false){
+                searchHistory.push(city);
+                localStorage.setItem("search",JSON.stringify(searchHistory));
+                renderSearchHistory();
+            }
+        }else if (searchHistory.length === 0) {
+            searchHistory.push(city);
+            localStorage.setItem("search",JSON.stringify(searchHistory));
+            renderSearchHistory();
+        }
+    };  
     //pageGenerate(city);
     searchCityEl.value = "";
 }
@@ -253,20 +273,19 @@ function renderSearchHistory() {
     for (let i = 0; i < searchHistory.length; i++) {
         const historyItem = document.createElement("li");
         const historyBtnEl = document.createElement("button")
+        var name = searchHistory[i];
+        var capitalize = name[0].toUpperCase() + name.slice(1).toLowerCase()
 
         historyItem.setAttribute("class", "white-text");
-        historyItem.textContent = searchHistory[i];
+        historyItem.textContent = capitalize;
         historyEl.appendChild(historyItem);
 
         historyBtnEl.addEventListener("click", buttonClickHandler.bind(null, searchHistory[i]));
     }
 }
-
-//Saves user's search history and displays them 
-
+//Display user's search history
 if (searchHistory.length > 0) {
     renderSearchHistory();
 }
-
 //on page load grab users ip and parse data for latitude and logitude
 localIp();
