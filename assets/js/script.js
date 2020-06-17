@@ -40,7 +40,7 @@ var localIp = function () {
                 var ipErrorInstance = M.Modal.init(ipErrorModalContainer);
 
                 ipErrorInstance.open();
-                
+
                 return;
             }
             //parse data for JSON payload
@@ -48,28 +48,27 @@ var localIp = function () {
                 .then(function (data) {
                     var lat = data.latitude
                     var lon = data.longitude
-                    //displays pollen count with the latitude and longitude from the JSON payload
                     getAirQuality(lat, lon);
                     getPollenCount(lat, lon)
                 })
         })
         //if geoIPlookup is offline
-        .catch(function(error) {
+        .catch(function (error) {
             var ipdownModalContainer = document.createElement("div");
-                ipdownModalContainer.setAttribute("class", "modal modal-error");
-                ipdownModalContainer.setAttribute("id", "local-down");
+            ipdownModalContainer.setAttribute("class", "modal modal-error");
+            ipdownModalContainer.setAttribute("id", "local-down");
 
-                mainEl.appendChild(ipdownModalContainer);
+            mainEl.appendChild(ipdownModalContainer);
 
-                var ipdownModal = document.createElement("div");
-                ipdownModal.setAttribute("class", "modal-content red-text center-align");
-                ipdownModal.innerText = (response.statusText + " Unable to get local air quality, please type in a city manually")
+            var ipdownModal = document.createElement("div");
+            ipdownModal.setAttribute("class", "modal-content red-text center-align");
+            ipdownModal.innerText = (response.statusText + " Unable to get local air quality, please type in a city manually")
 
-                ipdownModalContainer.appendChild(ipdownModal)
+            ipdownModalContainer.appendChild(ipdownModal)
 
-                var ipdownInstance = M.Modal.init(ipdownModalContainer);
+            var ipdownInstance = M.Modal.init(ipdownModalContainer);
 
-                ipdownInstance.open();
+            ipdownInstance.open();
         });
 }
 
@@ -77,17 +76,17 @@ var localIp = function () {
 var displayAQI = function (info) {
     $("#aq span").remove();
     var aqi = info.data.current.pollution.aqius;
-    if(aqi <=50.99){
+    if (aqi <= 50.99) {
         $("#aq").append(`<span class ='new-badge green'> ${aqi} <i class=" tiny material-icons">thumb_up</i></span>`);
-    }else if (aqi <=100.99){
-        $("#aq").append(`<span class ='new-badge yellow'> ${aqi} <i class=" tiny material-icons">info</i></span>`);          
-    }else if(aqi <=150.99){
+    } else if (aqi <= 100.99) {
+        $("#aq").append(`<span class ='new-badge yellow'> ${aqi} <i class=" tiny material-icons">info</i></span>`);
+    } else if (aqi <= 150.99) {
         $("#aq").append(`<span class ='new-badge orange'> ${aqi} <i class=" tiny material-icons">info</i></span>`);
-    }else if (aqi <=200.99){
-       $("#aq").append(`<span class ='new-badge red'> ${aqi} <i class=" tiny material-icons">warning</i></span>`);
-    }else if (aqi <=300.99){
+    } else if (aqi <= 200.99) {
+        $("#aq").append(`<span class ='new-badge red'> ${aqi} <i class=" tiny material-icons">warning</i></span>`);
+    } else if (aqi <= 300.99) {
         $("#aq").append(`<span class ='new-badge purple'> ${aqi} <i class=" tiny material-icons">warning</i></span>`);
-    }else if(aqi <=500){
+    } else if (aqi <= 500) {
         $("#aq").append(`<span class ='new-badge maroon'> ${aqi} <i class=" tiny material-icons">warning</i></span>`);
     }
 }
@@ -101,7 +100,7 @@ function getPollenCount(lat, lon) {
     let tempQueryURL = `https://api.climacell.co/v3/weather/realtime?${tempField}&lat=${lat}&lon=${lon}&apikey=${ClimaKey}`
     axios.get(tempQueryURL)
         .then(function (response) {
-            temperatureEl.innerHTML= "";
+            temperatureEl.innerHTML = "";
             const tempEl = document.querySelectorAll("temp-display");
             const cityTemperature = document.createElement("h1");
             // cityTemperature.setAttribute("");
@@ -115,7 +114,7 @@ function getPollenCount(lat, lon) {
     let pollenQueryURL = `https://api.climacell.co/v3/weather/realtime?fields=${pollenFields}&lat=${lat}&lon=${lon}&apikey=${ClimaKey}`
     axios.get(pollenQueryURL)
         .then(function (response) {
-            
+
             pollenEl.innerHTML = "";
 
             // Grass Pollen Count
@@ -155,8 +154,6 @@ var getAirQuality = function (lat, lon) {
                         cityEl.innerHTML = searchCityEl.value;
                         cityEl.setAttribute("class", "city-title")
                     }
-
-                    console.log("Air Quality", data.data);
                     displayAQI(data);
                 });
             } else {
@@ -179,63 +176,81 @@ var getAirQuality = function (lat, lon) {
         })
         .catch(function (error) {
             var avDownModalContainer = document.createElement("div");
-                avDownModalContainer.setAttribute("class", "modal modal-error");
-                avDownModalContainer.setAttribute("id", "av-down");
+            avDownModalContainer.setAttribute("class", "modal modal-error");
+            avDownModalContainer.setAttribute("id", "av-down");
 
-                mainEl.appendChild(avDownModalContainer);
+            mainEl.appendChild(avDownModalContainer);
 
-                var avDownModal = document.createElement("div");
-                avDownModal.setAttribute("class", "modal-content red-text center-align");
-                avDownModal.innerText = ("Unable to connect with server")
+            var avDownModal = document.createElement("div");
+            avDownModal.setAttribute("class", "modal-content red-text center-align");
+            avDownModal.innerText = ("Unable to connect with server")
 
-                avDownModalContainer.appendChild(avDownModal)
+            avDownModalContainer.appendChild(avDownModal)
 
-                var avDownInstance = M.Modal.init(avDownModalContainer);
+            var avDownInstance = M.Modal.init(avDownModalContainer);
 
-                avDownInstance.open();
-            
+            avDownInstance.open();
+
         });
 }
 //on page load initialize modal
 $(document).ready(function () {
     $('.modal').modal();
 });
-
+// prevent duplicate searches from being saved in localstorage
+var preventDuplicate = function (name) {
+    var i = 0;
+    while (i < searchHistory.length) {
+        if (searchHistory[i].toUpperCase() === name.toUpperCase()) {
+            return true;
+        }
+        i++
+    }
+    return false;
+}
 var buttonClickHandler = function (event) {
     var city = event.value;
-    //var searchCityEl = event.value;
+    if (city) {
+        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=65fd11245a646ac22c447bd4432d911d`)
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (results) {
+                            getAirQuality(results.coord.lat, results.coord.lon);
+                            getPollenCount(results.coord.lat, results.coord.lon);
+                        })
+                } else {
+                    var errorModalContainer = document.createElement("div");
+                    errorModalContainer.setAttribute("class", "modal modal-error");
+                    errorModalContainer.setAttribute("id", "city-error");
 
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=65fd11245a646ac22c447bd4432d911d`)
-        .then(function (response) {
-            if (response.ok) {
-                response.json()
-                    .then(function (results) {
-                        getAirQuality(results.coord.lat, results.coord.lon);
-                        getPollenCount(results.coord.lat, results.coord.lon);
-                    })
-            } else {
-                var errorModalContainer = document.createElement("div");
-                errorModalContainer.setAttribute("class", "modal modal-error");
-                errorModalContainer.setAttribute("id", "city-error");
+                    mainEl.appendChild(errorModalContainer);
 
-                mainEl.appendChild(errorModalContainer);
+                    var errorModal = document.createElement("div");
+                    errorModal.setAttribute("class", "modal-content red-text center-align");
+                    errorModal.innerText = (response.statusText + " Please Try Another City")
 
-                var errorModal = document.createElement("div");
-                errorModal.setAttribute("class", "modal-content red-text center-align");
-                errorModal.innerText = (response.statusText + " Please Try Another City")
+                    errorModalContainer.appendChild(errorModal)
 
-                errorModalContainer.appendChild(errorModal)
+                    var errorInstance = M.Modal.init(errorModalContainer);
 
-                var errorInstance = M.Modal.init(errorModalContainer);
-
-                errorInstance.open();
-            };
-        });
-    
-    searchHistory.push(city);
-    localStorage.setItem("search",JSON.stringify(searchHistory));
-    renderSearchHistory();
-    
+                    errorInstance.open();
+                };
+            });
+        //save and display user's search history
+        if (searchHistory.length > 0) {
+            var validate = preventDuplicate(city)
+            if (validate === false) {
+                searchHistory.push(city);
+                localStorage.setItem("search", JSON.stringify(searchHistory));
+                renderSearchHistory();
+            }
+        } else if (searchHistory.length === 0) {
+            searchHistory.push(city);
+            localStorage.setItem("search", JSON.stringify(searchHistory));
+            renderSearchHistory();
+        }
+    };
     //pageGenerate(city);
     searchCityEl.value = "";
 }
@@ -245,8 +260,9 @@ submitBtnEl.addEventListener("click", function () {
 });
 
 // Clear Search History
-clearEl.addEventListener("click",function() {
+clearEl.addEventListener("click", function () {
     searchHistory = [];
+    localStorage.clear();
     renderSearchHistory();
 })
 
@@ -255,22 +271,25 @@ function renderSearchHistory() {
     historyEl.innerHTML = "";
 
     for (let i = 0; i < searchHistory.length; i++) {
-        const historyItem = document.createElement("li");
-        const historyBtnEl = document.createElement("button")
 
-        historyItem.setAttribute("class", "white-text");
-        historyItem.textContent = searchHistory[i];
+        const historyItem = document.createElement("a");
+        /* const historyBtnEl = document.createElement("a") */
+        var name = searchHistory[i];
+
+        historyItem.setAttribute("class", "collection-item waves-effect active white-text transparent cities");
+        historyItem.textContent = name;
         historyEl.appendChild(historyItem);
-
-        historyBtnEl.addEventListener("click", buttonClickHandler.bind(null, searchHistory[i]));
     }
 }
-
-//Saves user's search history and displays them 
-renderSearchHistory();
+//Display user's search history
 if (searchHistory.length > 0) {
-    buttonClickHandler();
+    renderSearchHistory();
 }
+
+historyEl.addEventListener("click", function (e) {
+    searchCityEl.value = e.target.text;
+    buttonClickHandler(searchCityEl)
+});
 
 //on page load grab users ip and parse data for latitude and logitude
 localIp();
