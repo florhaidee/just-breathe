@@ -26,10 +26,11 @@
 /*
 #temp-display {
     font-size: medium;
+} */
+.city-title {
+    font-size: x-large;
 }
-#cityName {
-    font-size: medium;
-}
+/*
 #date {
     font-size: medium;
 }

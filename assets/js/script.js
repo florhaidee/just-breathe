@@ -147,10 +147,12 @@ var getAirQuality = function (lat, lon) {
                 response.json().then(function (data) {
                     if (searchCityEl.value.length === 0) {
                         cityEl.innerHTML = data.data.city;
+                        //cityEl.setAttribute("class", "city-title")
                     }
                     // this will display the entered value in the input field
                     else {
                         cityEl.innerHTML = searchCityEl.value;
+                        //cityEl.setAttribute("class", "city-title")
                     }
 
                     console.log("Air Quality", data.data);
