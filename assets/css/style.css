@@ -58,3 +58,14 @@
     font-size: 25px;
     font-weight: bold;
 }
+/*Search history list Style*/
+.collection {
+   border: 0px;
+   border-radius: 0px;
+}
+.collection .collection-item {
+    border-bottom: 0px;
+}
+.cities {
+   text-transform: capitalize; 
+}
