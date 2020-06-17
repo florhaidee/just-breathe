@@ -14,6 +14,7 @@ var mainEl = document.querySelector("#body")
 
 //changes date to today's day
 $("#date").text(moment().format('MMMM Do, YYYY'));
+$("#date").addClass("date-text");
 
 // Stores searched city name
 let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
@@ -146,10 +147,12 @@ var getAirQuality = function (lat, lon) {
                 response.json().then(function (data) {
                     if (searchCityEl.value.length === 0) {
                         cityEl.innerHTML = data.data.city;
+                        cityEl.setAttribute("class", "city-title")
                     }
                     // this will display the entered value in the input field
                     else {
                         cityEl.innerHTML = searchCityEl.value;
+                        cityEl.setAttribute("class", "city-title")
                     }
                     displayAQI(data);
                 });
