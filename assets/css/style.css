@@ -14,10 +14,6 @@
     height: 350px;
     margin: 100px;
 }
-/* submit button color */
-.btn {
-    background-color: grey;
-}
 
 /* modal reference buttons */
 .ref {
@@ -53,3 +49,12 @@
     width: 100%;
 }
 
+/* Air Quality Index Style*/
+#aq span {
+    padding: 0.2rem;
+    border-radius: 25%;
+}
+.modal-error {
+    font-size: 25px;
+    font-weight: bold;
+}
