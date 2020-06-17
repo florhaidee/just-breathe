@@ -47,7 +47,6 @@ var localIp = function () {
                 .then(function (data) {
                     var lat = data.latitude
                     var lon = data.longitude
-                    //displays pollen count with the latitude and longitude from the JSON payload
                     getAirQuality(lat, lon);
                     getPollenCount(lat, lon)
                 })

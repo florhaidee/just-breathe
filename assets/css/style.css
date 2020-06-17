@@ -69,3 +69,7 @@
 .cities {
    text-transform: capitalize; 
 }
+
+.text-shadow {
+    text-shadow: 2px 2px 10px #000000;
+}
