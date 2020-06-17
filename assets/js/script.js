@@ -152,8 +152,6 @@ var getAirQuality = function (lat, lon) {
                     else {
                         cityEl.innerHTML = searchCityEl.value;
                     }
-
-                    console.log("Air Quality", data.data);
                     displayAQI(data);
                 });
             } else {
@@ -201,7 +199,6 @@ $(document).ready(function () {
 var preventDuplicate = function (name) {
     var i = 0;
     while (i < searchHistory.length) {
-        console.log(searchHistory[i], name)
         if (searchHistory[i].toUpperCase() === name.toUpperCase()) {
             return true;
         }
@@ -263,6 +260,7 @@ submitBtnEl.addEventListener("click", function () {
 // Clear Search History
 clearEl.addEventListener("click", function () {
     searchHistory = [];
+    localStorage.clear();
     renderSearchHistory();
 })
 
@@ -271,21 +269,25 @@ function renderSearchHistory() {
     historyEl.innerHTML = "";
 
     for (let i = 0; i < searchHistory.length; i++) {
-        const historyItem = document.createElement("li");
-        const historyBtnEl = document.createElement("button")
+
+        const historyItem = document.createElement("a");
+        /* const historyBtnEl = document.createElement("a") */
         var name = searchHistory[i];
-        var capitalize = name[0].toUpperCase() + name.slice(1).toLowerCase()
 
-        historyItem.setAttribute("class", "white-text");
-        historyItem.textContent = capitalize;
+        historyItem.setAttribute("class", "collection-item waves-effect active white-text transparent cities");
+        historyItem.textContent = name;
         historyEl.appendChild(historyItem);
-
-        historyBtnEl.addEventListener("click", buttonClickHandler.bind(null, searchHistory[i]));
     }
 }
 //Display user's search history
 if (searchHistory.length > 0) {
     renderSearchHistory();
 }
+
+historyEl.addEventListener("click", function (e) {
+    searchCityEl.value = e.target.text;
+    buttonClickHandler(searchCityEl)
+});
+
 //on page load grab users ip and parse data for latitude and logitude
 localIp();
