@@ -28,19 +28,23 @@
     font-size: medium;
 } */
 .city-title {
-    font-size: x-large;
-}
-/*
-#date {
-    font-size: medium;
+    font-size: xx-large;
+    font-weight: 700;
 }
 
-#aq {
-    font-size: medium;
+.date-text {
+    font-size: large;
 }
-#pc {
-    font-size: medium;
-} */
+
+.result-title {
+    font-size: x-large;
+    font-weight: 600;
+}
+
+ .large-600 {
+    font-size: large;
+    font-weight: 600;
+}
 
 .small-text {
     font-size: 11px;
