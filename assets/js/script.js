@@ -23,20 +23,53 @@ var localIp = function () {
     getUserIp = "https://json.geoiplookup.io/"
     fetch(getUserIp)
         .then(function (response) {
-            if (response.ok) {
-                //parse data for JSON payload
-                response.json()
-                    .then(function (data) {
-                        var lat = data.latitude
-                        var lon = data.longitude
-                        //displays pollen count with the latitude and longitude from the JSON payload
-                        getAirQuality(lat, lon);
-                        getPollenCount(lat, lon)
-                    })
-            } else {
-                alert("Error: " + response.statusText);          
+            if (!response.ok) {
+                var ipErrorModalContainer = document.createElement("div");
+                ipErrorModalContainer.setAttribute("class", "modal modal-error");
+                ipErrorModalContainer.setAttribute("id", "badIp-error");
+
+                mainEl.appendChild(ipErrorModalContainer);
+
+                var ipErrorModal = document.createElement("div");
+                ipErrorModal.setAttribute("class", "modal-content red-text center-align");
+                ipErrorModal.innerText = (response.statusText + " Unable to get local air quality, please type in a city manually")
+
+                ipErrorModalContainer.appendChild(ipErrorModal)
+
+                var ipErrorInstance = M.Modal.init(ipErrorModalContainer);
+
+                ipErrorInstance.open();
+                
+                return;
             }
+            //parse data for JSON payload
+            response.json()
+                .then(function (data) {
+                    var lat = data.latitude
+                    var lon = data.longitude
+                    //displays pollen count with the latitude and longitude from the JSON payload
+                    getAirQuality(lat, lon);
+                    getPollenCount(lat, lon)
+                })
         })
+        //if geoIPlookup is offline
+        .catch(function(error) {
+            var ipdownModalContainer = document.createElement("div");
+                ipdownModalContainer.setAttribute("class", "modal modal-error");
+                ipdownModalContainer.setAttribute("id", "local-down");
+
+                mainEl.appendChild(ipdownModalContainer);
+
+                var ipdownModal = document.createElement("div");
+                ipdownModal.setAttribute("class", "modal-content red-text center-align");
+                ipdownModal.innerText = (response.statusText + " Unable to get local air quality, please type in a city manually")
+
+                ipdownModalContainer.appendChild(ipdownModal)
+
+                var ipdownInstance = M.Modal.init(ipdownModalContainer);
+
+                ipdownInstance.open();
+        });
 }
 
 //display AQI on page
@@ -133,11 +166,40 @@ var getAirQuality = function (lat, lon) {
                     displayAQI(data);
                 });
             } else {
-                alert("Error: City not found, Please try again");
+                var aqErrorModalContainer = document.createElement("div");
+                aqErrorModalContainer.setAttribute("class", "modal modal-error");
+                aqErrorModalContainer.setAttribute("id", "aq-down");
+
+                mainEl.appendChild(aqErrorModalContainer);
+
+                var aqErrorModal = document.createElement("div");
+                aqErrorModal.setAttribute("class", "modal-content red-text center-align");
+                aqErrorModal.innerText = (response.statusText)
+
+                aqErrorModalContainer.appendChild(aqErrorModal)
+
+                var aqErrorInstance = M.Modal.init(aqErrorModalContainer);
+
+                aqErrorInstance.open();
             }
         })
         .catch(function (error) {
-            alert("Unable to connect with server");
+            var avDownModalContainer = document.createElement("div");
+                avDownModalContainer.setAttribute("class", "modal modal-error");
+                avDownModalContainer.setAttribute("id", "av-down");
+
+                mainEl.appendChild(avDownModalContainer);
+
+                var avDownModal = document.createElement("div");
+                avDownModal.setAttribute("class", "modal-content red-text center-align");
+                avDownModal.innerText = ("Unable to connect with server")
+
+                avDownModalContainer.appendChild(avDownModal)
+
+                var avDownInstance = M.Modal.init(avDownModalContainer);
+
+                avDownInstance.open();
+            
         });
 }
 //on page load initialize modal
@@ -153,14 +215,12 @@ var buttonClickHandler = function (event) {
             if (response.ok) {
                 response.json()
                     .then(function (results) {
-                        console.log(results);
-                        console.log(results.coord.lat, results.coord.lon)
                         getAirQuality(results.coord.lat, results.coord.lon);
                         getPollenCount(results.coord.lat, results.coord.lon);
                     })
             } else {
                 var errorModalContainer = document.createElement("div");
-                errorModalContainer.setAttribute("class", "modal");
+                errorModalContainer.setAttribute("class", "modal modal-error");
                 errorModalContainer.setAttribute("id", "city-error");
 
                 mainEl.appendChild(errorModalContainer);
@@ -177,7 +237,7 @@ var buttonClickHandler = function (event) {
             };
         });
 
-    // call Florha and Matt's functions with the value of the text button
+    
     //pageGenerate(city);
     searchCityEl.value = "";
 }
