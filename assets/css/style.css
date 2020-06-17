@@ -55,3 +55,8 @@
 #aqi-ref {
     width: 250px;
 }
+
+.modal-error {
+    font-size: 25px;
+    font-weight: bold;
+}
