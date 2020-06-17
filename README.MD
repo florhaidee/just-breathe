@@ -1,14 +1,14 @@
 # Just Breathe
 
 ## Description
-An application that uses third-party API:"Air Visual" and "Climaell", to display air quality index, pollent count and temperature for a given city.
+An application that uses third-party API:"Air Visual" and "Climacell", to display air quality index, pollent count and temperature for a given city.
 
 ## Motivation for development
 Given the current situation with global warming, and the cities every day closest to factories, the level of air quality, pollution and pollen allergies are getting worse. We wanted to create an application where everyone can see if their city has a good air quality and types of pollen count; and even know what are the aftermaths depending on the level of contamination on their city.  
 We also included the posibility to search for other cities information and gave our users the chance to know what are those indexes before move or travel to other cities.
 
 ## Features
-* When users open the application the page display Air quality, Pollent count types and temperaure for current location. 
+* When users open the application the page display Air quality, Pollen count types and temperaure for current location. 
 
 ![main page](./assets/images/name)
 
@@ -49,10 +49,10 @@ https://florhaidee.github.io/just-breathe/
 
 ## Contribution
 
-* @Parker - Display/layout, materialize.
+* @parkerrobison - Display/layout, materialize.
 * @jasonmcgill - Get visitor's long and lat function. Display current city and date. Display modals
 * @siwel20- Listener for search data and Pollent count index reference
-* @Florhaidee - Air quailty index fetch.  History data validation.
+* @florhaidee - Air quailty index fetch.  History data validation.
 * @MatthewMcFadden - Pollen count fetch.  Display temperature function. History data 
 
 
