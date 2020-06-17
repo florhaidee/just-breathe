@@ -39,7 +39,7 @@ var localIp = function () {
                 var ipErrorInstance = M.Modal.init(ipErrorModalContainer);
 
                 ipErrorInstance.open();
-                
+
                 return;
             }
             //parse data for JSON payload
@@ -53,22 +53,22 @@ var localIp = function () {
                 })
         })
         //if geoIPlookup is offline
-        .catch(function(error) {
+        .catch(function (error) {
             var ipdownModalContainer = document.createElement("div");
-                ipdownModalContainer.setAttribute("class", "modal modal-error");
-                ipdownModalContainer.setAttribute("id", "local-down");
+            ipdownModalContainer.setAttribute("class", "modal modal-error");
+            ipdownModalContainer.setAttribute("id", "local-down");
 
-                mainEl.appendChild(ipdownModalContainer);
+            mainEl.appendChild(ipdownModalContainer);
 
-                var ipdownModal = document.createElement("div");
-                ipdownModal.setAttribute("class", "modal-content red-text center-align");
-                ipdownModal.innerText = (response.statusText + " Unable to get local air quality, please type in a city manually")
+            var ipdownModal = document.createElement("div");
+            ipdownModal.setAttribute("class", "modal-content red-text center-align");
+            ipdownModal.innerText = (response.statusText + " Unable to get local air quality, please type in a city manually")
 
-                ipdownModalContainer.appendChild(ipdownModal)
+            ipdownModalContainer.appendChild(ipdownModal)
 
-                var ipdownInstance = M.Modal.init(ipdownModalContainer);
+            var ipdownInstance = M.Modal.init(ipdownModalContainer);
 
-                ipdownInstance.open();
+            ipdownInstance.open();
         });
 }
 
@@ -76,17 +76,17 @@ var localIp = function () {
 var displayAQI = function (info) {
     $("#aq span").remove();
     var aqi = info.data.current.pollution.aqius;
-    if(aqi <=50.99){
+    if (aqi <= 50.99) {
         $("#aq").append(`<span class ='new-badge green'> ${aqi} <i class=" tiny material-icons">thumb_up</i></span>`);
-    }else if (aqi <=100.99){
-        $("#aq").append(`<span class ='new-badge yellow'> ${aqi} <i class=" tiny material-icons">info</i></span>`);          
-    }else if(aqi <=150.99){
+    } else if (aqi <= 100.99) {
+        $("#aq").append(`<span class ='new-badge yellow'> ${aqi} <i class=" tiny material-icons">info</i></span>`);
+    } else if (aqi <= 150.99) {
         $("#aq").append(`<span class ='new-badge orange'> ${aqi} <i class=" tiny material-icons">info</i></span>`);
-    }else if (aqi <=200.99){
-       $("#aq").append(`<span class ='new-badge red'> ${aqi} <i class=" tiny material-icons">warning</i></span>`);
-    }else if (aqi <=300.99){
+    } else if (aqi <= 200.99) {
+        $("#aq").append(`<span class ='new-badge red'> ${aqi} <i class=" tiny material-icons">warning</i></span>`);
+    } else if (aqi <= 300.99) {
         $("#aq").append(`<span class ='new-badge purple'> ${aqi} <i class=" tiny material-icons">warning</i></span>`);
-    }else if(aqi <=500){
+    } else if (aqi <= 500) {
         $("#aq").append(`<span class ='new-badge maroon'> ${aqi} <i class=" tiny material-icons">warning</i></span>`);
     }
 }
@@ -100,7 +100,7 @@ function getPollenCount(lat, lon) {
     let tempQueryURL = `https://api.climacell.co/v3/weather/realtime?${tempField}&lat=${lat}&lon=${lon}&apikey=${ClimaKey}`
     axios.get(tempQueryURL)
         .then(function (response) {
-            temperatureEl.innerHTML= "";
+            temperatureEl.innerHTML = "";
             const tempEl = document.querySelectorAll("temp-display");
             const cityTemperature = document.createElement("h1");
             // cityTemperature.setAttribute("");
@@ -114,7 +114,7 @@ function getPollenCount(lat, lon) {
     let pollenQueryURL = `https://api.climacell.co/v3/weather/realtime?fields=${pollenFields}&lat=${lat}&lon=${lon}&apikey=${ClimaKey}`
     axios.get(pollenQueryURL)
         .then(function (response) {
-            
+
             pollenEl.innerHTML = "";
 
             // Grass Pollen Count
@@ -176,21 +176,21 @@ var getAirQuality = function (lat, lon) {
         })
         .catch(function (error) {
             var avDownModalContainer = document.createElement("div");
-                avDownModalContainer.setAttribute("class", "modal modal-error");
-                avDownModalContainer.setAttribute("id", "av-down");
+            avDownModalContainer.setAttribute("class", "modal modal-error");
+            avDownModalContainer.setAttribute("id", "av-down");
 
-                mainEl.appendChild(avDownModalContainer);
+            mainEl.appendChild(avDownModalContainer);
 
-                var avDownModal = document.createElement("div");
-                avDownModal.setAttribute("class", "modal-content red-text center-align");
-                avDownModal.innerText = ("Unable to connect with server")
+            var avDownModal = document.createElement("div");
+            avDownModal.setAttribute("class", "modal-content red-text center-align");
+            avDownModal.innerText = ("Unable to connect with server")
 
-                avDownModalContainer.appendChild(avDownModal)
+            avDownModalContainer.appendChild(avDownModal)
 
-                var avDownInstance = M.Modal.init(avDownModalContainer);
+            var avDownInstance = M.Modal.init(avDownModalContainer);
 
-                avDownInstance.open();
-            
+            avDownInstance.open();
+
         });
 }
 //on page load initialize modal
@@ -199,11 +199,11 @@ $(document).ready(function () {
 });
 // prevent duplicate searches from being saved in localstorage
 var preventDuplicate = function (name) {
-    var i=0;
-    while(i<searchHistory.length){
+    var i = 0;
+    while (i < searchHistory.length) {
         console.log(searchHistory[i], name)
-        if(searchHistory[i].toUpperCase() === name.toUpperCase()){ 
-            return true; 
+        if (searchHistory[i].toUpperCase() === name.toUpperCase()) {
+            return true;
         }
         i++
     }
@@ -241,17 +241,17 @@ var buttonClickHandler = function (event) {
         //save and display user's search history
         if (searchHistory.length > 0) {
             var validate = preventDuplicate(city)
-            if( validate === false){
+            if (validate === false) {
                 searchHistory.push(city);
-                localStorage.setItem("search",JSON.stringify(searchHistory));
+                localStorage.setItem("search", JSON.stringify(searchHistory));
                 renderSearchHistory();
             }
-        }else if (searchHistory.length === 0) {
+        } else if (searchHistory.length === 0) {
             searchHistory.push(city);
-            localStorage.setItem("search",JSON.stringify(searchHistory));
+            localStorage.setItem("search", JSON.stringify(searchHistory));
             renderSearchHistory();
         }
-    };  
+    };
     //pageGenerate(city);
     searchCityEl.value = "";
 }
@@ -261,7 +261,7 @@ submitBtnEl.addEventListener("click", function () {
 });
 
 // Clear Search History
-clearEl.addEventListener("click",function() {
+clearEl.addEventListener("click", function () {
     searchHistory = [];
     renderSearchHistory();
 })
