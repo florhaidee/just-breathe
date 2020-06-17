@@ -12,7 +12,6 @@
 
 #container {
     height: 350px;
-    margin: 100px;
 }
 
 /* modal reference buttons */
@@ -20,10 +19,11 @@
     margin-top: 2px;
     width: 250px;
 }
-/*#header-title {
-    font-size: medium;
-}
 
+ header {
+    margin-top: 0;
+}
+/*
 #temp-display {
     font-size: medium;
 }
