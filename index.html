@@ -11,16 +11,16 @@
 </head>
 
 <body class="white-text background-img" id="body">
-    <header>
+    <header class="card transparent z-depth-3">
         <div class="row" id="header">
-            <div class="col s4">
-                <div class="valign-wrapper">
-                    <h1 id="header-title">Just Breathe</h1>
-                </div>
+            <div class="col s12 l6">
+                <!-- <div class="valign-wrapper"> -->
+                    <h1 class="center" id="header-title">Just Breathe <i class=" medium material-icons hide-on-small-only">landscape</i></h1>
+                <!-- </div> -->
             </div>
             <!-- Temperature Display-->
-            <div class="col s3 offset-s5">
-                <div id="temp-display" class="valign-wrapper"></div>
+            <div class="col s12 l3 offset-l3">
+                <div id="temp-display" class="center-align"></div>
                 <!--widget to display AQI-->
                 <!-- <div name="airvisual_widget" key="9SzoEJ46s9XxF9Lhp"></div>-->
             </div>
@@ -29,8 +29,8 @@
     <div class="container">
         <main>
             <div class="row">
-                <div class="col s6 offset-s3">
-                    <div class="card transparent center z-depth-5" id="container">
+                <div class="col s12">
+                    <div class="transparent center-align z-depth-5" id="container">
                         <!--this information will need to be dynamically inserted into these divs-->
                         <div id="cityName">City Placeholder</div>
                         <div id="date">Date Placeholder</div>
@@ -44,7 +44,7 @@
             </div>
             <div class="row">
                 <div id="bottom-div">
-                    <div class="col s4" id="search-container">
+                    <div class="col s12 m6 l6" id="search-container">
                         <div class="card transparent z-depth-3">
                             <div id="searchHeader">Search for a new city:</div>
                             <!--an unordered list will need to be dynamically created in history-->
@@ -54,7 +54,7 @@
                                     <label for="city"></label>
                                     <input type="text" name="cityInput" id="searchCity" class="white-text" />
                                 </div>
-                                <div class="col s3">
+                                <div class="col s12 l3">
                                     <button class="btn waves-effect light-green lighten-1" type="submit" name="action"
                                         id="submit-btn">
                                         <i class=" small material-icons">search</i>
@@ -69,14 +69,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="col s3 offset-s4 right" id="references">
-                    <a href="#aqi-modal" class="btn light-green lighten-1 modal-trigger small-text ref" id="aqi-ref">Air Quality Index
+                <div class="col s12 m6 l5 offset-l1 " id="references">
+                    <div>
+                        <a href="#aqi-modal" class="btn light-green lighten-1 modal-trigger small-text ref" id="aqi-ref">Air Quality Index
                         Reference</a>
+                    </div>
+                    <div>
+                        <a href="#pollen-modal" class="btn light-green lighten-1 modal-trigger small-text ref">Pollen Index Reference</a>
+                    </div>
                 </div>
-                <div class="col s3 offset-s4 right" id="references">
-                    <a href="#pollen-modal" class="btn light-green lighten-1 modal-trigger small-text ref">Pollen Index Reference</a>
-                </div>
-            </div>
           
                  <!-- Modal for Pollen Begin-->
                  <div class="modal" id="pollen-modal">
