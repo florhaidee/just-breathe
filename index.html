@@ -10,7 +10,7 @@
     <title>Just Breathe</title>
 </head>
 
-<body class="white-text background-img">
+<body class="white-text background-img" id="body">
     <header>
         <div class="row" id="header">
             <div class="col s4">
@@ -34,7 +34,7 @@
                         <!--this information will need to be dynamically inserted into these divs-->
                         <div id="cityName">City Placeholder</div>
                         <div id="date">Date Placeholder</div>
-                        <div id="aq">Air Quality Index:</div>
+                        <div id="aq">Air Quality Index: </div>
                         <div>Pollen Information:</div>
                         <div id="pc">
                             <!-- dynamically generated pollen info goes here -->
@@ -70,54 +70,54 @@
                     </div>
                 </div>
                 <div class="col s3 offset-s4 right" id="references">
-                    <a href="#aqi-modal" class="btn grey modal-trigger small-text" id="aqi-ref">Air Quality Index
+                    <a href="#aqi-modal" class="btn grey modal-trigger small-text ref" id="aqi-ref">Air Quality Index
                         Reference</a>
                 </div>
-                <div class="col s3 offset-s4 right ref" id="references">
-                    <a href="#pollen-modal" class="btn grey modal-trigger">Pollen Index Reference</a>
+                <div class="col s3 offset-s4 right" id="references">
+                    <a href="#pollen-modal" class="btn grey modal-trigger small-text ref">Pollen Index Reference</a>
                 </div>
             </div>
           
                  <!-- Modal for Pollen Begin-->
                  <div class="modal" id="pollen-modal">
-                    <div class="container small-text width-100" id="pollen-table">
+                    <div class="container small-text width-100 black-text" id="pollen-table">
                         <!-- Intro Information -->
                         <div class="row margin left-align">
-                            <div class="col s12">What Does Pollen Index Mean?</div>
+                            <div class="col s12"><b>What Does Pollen Index Mean?</b></div>
                             <div class="col s12">The pollen index is the level of airborne grains concentration per category and species.</div>
                         </div>
                         <!-- Score and descritpion titles -->
-                        <div class="row margin grey left-align">
+                        <div class="row margin grey lighten-2 left-align">
                             <div class="col s4">Score</div>
                             <div class="col s8">Description</div>
                         </div>
                         <!-- High -->
-                        <div class="row margin left-align">
+                        <div class="row margin red left-align">
                             <div class="col s4">5</div>
                             <div class="col s8">High</div>
                         </div>
                         <!-- Medium to High -->
-                        <div class="row margin grey left-align">
+                        <div class="row margin orange left-align">
                             <div class="col s4">4</div>
                             <div class="col s8">Medium to High</div>
                         </div>
                         <!-- Medium -->
-                        <div class="row margin left-align">
+                        <div class="row margin yellow left-align">
                             <div class="col s4">3</div>
                             <div class="col s8">Medium</div>
                         </div>
                         <!-- Low to Medium -->
-                        <div class="row margin grey left-align">
+                        <div class="row margin lime left-align">
                             <div class="col s4">2</div>
                             <div class="col s8">Low to Medium</div>
                         </div>
                         <!-- Low -->
-                        <div class="row margin left-align">
+                        <div class="row margin light-green left-align">
                             <div class="col s4">1</div>
                             <div class="col s8">Low</div>
                         </div>
                         <!-- Minimal to None -->
-                        <div class="row margin grey left-align">
+                        <div class="row margin green left-align">
                             <div class="col s4">0</div>
                             <div class="col s8">Minimal to None</div>
                         </div>
