@@ -211,7 +211,7 @@ var preventDuplicate = function (name) {
 var buttonClickHandler = function (event) {
     var city = event.value;
     if (city) {
-        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=65fd11245a646ac22c447bd4432d911d`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=65fd11245a646ac22c447bd4432d911d`)
             .then(function (response) {
                 if (response.ok) {
                     response.json()
