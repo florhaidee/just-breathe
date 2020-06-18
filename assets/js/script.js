@@ -152,8 +152,8 @@ var getAirQuality = function (lat, lon) {
                     }
                     // this will display the entered value in the input field
                     else {
-                        cityEl.innerHTML = searchCityEl.value;
-                        cityEl.setAttribute("class", "city-title")
+                        cityEl.innerHTML = searchCityEl.value.toLowerCase();
+                        cityEl.setAttribute("class", "city-title cities")
                         searchCityEl.value = "";
                     }
                     displayAQI(data);
@@ -277,7 +277,7 @@ function renderSearchHistory() {
 
         const historyItem = document.createElement("a");
         /* const historyBtnEl = document.createElement("a") */
-        var name = searchHistory[i];
+        var name = searchHistory[i].toLowerCase();
 
         historyItem.setAttribute("class", "collection-item waves-effect active white-text transparent cities");
         historyItem.textContent = name;
