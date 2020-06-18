@@ -103,7 +103,7 @@ function getPollenCount(lat, lon) {
             temperatureEl.innerHTML = "";
             const tempEl = document.querySelectorAll("temp-display");
             const cityTemperature = document.createElement("h1");
-            // cityTemperature.setAttribute("");
+            //cityTemperature.setAttribute("");
             cityTemperature.innerHTML = Math.round(response.data.temp.value) + " &#176F";
             temperatureEl.append(cityTemperature);
         })
@@ -148,11 +148,13 @@ var getAirQuality = function (lat, lon) {
                     if (searchCityEl.value.length === 0) {
                         cityEl.innerHTML = data.data.city;
                         cityEl.setAttribute("class", "city-title")
+                        searchCityEl.value = "";
                     }
                     // this will display the entered value in the input field
                     else {
                         cityEl.innerHTML = searchCityEl.value;
                         cityEl.setAttribute("class", "city-title")
+                        searchCityEl.value = "";
                     }
                     displayAQI(data);
                 });
@@ -252,7 +254,8 @@ var buttonClickHandler = function (event) {
         }
     };
     //pageGenerate(city);
-    searchCityEl.value = "";
+    // moved this line of code to 151 and 157
+    // searchCityEl.value = "";
 }
 
 submitBtnEl.addEventListener("click", function () {
