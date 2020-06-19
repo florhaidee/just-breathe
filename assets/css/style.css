@@ -2,12 +2,58 @@
     margin: 2px;
 }
 
-.background-img {
+.saved-container {
+    height: 400px;
+}
+
+.background-img-good {
     background-image: url("../images/james-wheeler-ZOA-cqKuJAA-unsplash.jpg");
     object-fit: scale-down;
     width: auto;
     height: auto;
     background-position: center top;
+}
+
+.background-img-moderate {
+    background-image: url("../images/seaside.JPG");
+    object-fit: cover;
+    width: auto;
+    height: auto;
+    background-position: top;
+}
+
+.background-img-sensitive {
+    background-image: url("../images/dark-hazy.jpg");
+    object-fit: cover;
+    width: auto;
+    height: auto;
+    background-size: cover;
+    background-position: top;
+}
+
+.background-img-unhealthy {
+    background-image: url("../images/unhealthy.jpg");
+    object-fit: cover;
+    width: auto;
+    height: auto;
+    background-size: cover;
+    background-position: top;
+}
+.background-img-vunhealthy {
+    background-image: url("../images/city-smog.JPG");
+    object-fit: cover;
+    width: auto;
+    height: auto;
+    background-size: cover;
+    background-position: top;
+}
+.background-img-hazardous {
+    background-image: url("../images/Air-pollution-beijing-china.jpg");
+    object-fit: cover;
+    width: auto;
+    height: auto;
+    background-size: cover;
+    background-position: center;
 }
 
 #container {
