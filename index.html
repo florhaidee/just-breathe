@@ -10,7 +10,7 @@
     <title>Just Breathe</title>
 </head>
 
-<body class="white-text background-img" id="body">
+<body id="body">
     <header class="card transparent z-depth-3">
 
         <div class="row" id="header">
@@ -45,7 +45,17 @@
             </div>
             <div class="row">
                 <div id="bottom-div">
-                    <div class="col s12 m6 l6" id="search-container">
+                    <div class="col s12 push-m6 m6 push-l6 l5 offset-l1 center" id="references">
+                        <div>
+                            <a href="#aqi-modal" class="btn light-green lighten-1 modal-trigger small-text ref" id="aqi-ref">Air Quality Index
+    
+                            Reference</a>
+                        </div>
+                        <div>
+                            <a href="#pollen-modal" class="btn light-green lighten-1 modal-trigger small-text ref">Pollen Index Reference</a>
+                        </div>
+                    </div>
+                    <div class="col s12 pull-m6 m6 pull-l6 l6 " id="search-container">
                         <div class="card transparent z-depth-3">
                             <div class="large-600" id="searchHeader">Search for a new city:</div>
                             <div class="row">
@@ -62,7 +72,7 @@
                             </div>
                         </div>
                         <!-- History Container -->
-                        <div>
+                        <div class="saved-container">
                             <div class="large-600" id="history-title">
                                 <p>History:</p>
                             </div>
@@ -72,16 +82,7 @@
                     </div>
                 </div>
 
-                <div class="col s12 m6 l5 offset-l1 " id="references">
-                    <div>
-                        <a href="#aqi-modal" class="btn light-green lighten-1 modal-trigger small-text ref" id="aqi-ref">Air Quality Index
-
-                        Reference</a>
-                    </div>
-                    <div>
-                        <a href="#pollen-modal" class="btn light-green lighten-1 modal-trigger small-text ref">Pollen Index Reference</a>
-                    </div>
-                </div>
+                
           
                  <!-- Modal for Pollen Begin-->
                  <div class="modal" id="pollen-modal">

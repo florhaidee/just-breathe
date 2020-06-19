@@ -75,19 +75,26 @@ var localIp = function () {
 //display AQI on page
 var displayAQI = function (info) {
     $("#aq span").remove();
+    $("#body").removeClass();
     var aqi = info.data.current.pollution.aqius;
     if (aqi <= 50.99) {
         $("#aq").append(`<span class ='new-badge green'> ${aqi} <i class=" tiny material-icons">thumb_up</i></span>`);
+        $("#body").addClass("white-text background-img-good");
     } else if (aqi <= 100.99) {
         $("#aq").append(`<span class ='new-badge yellow'> ${aqi} <i class=" tiny material-icons">info</i></span>`);
+        $("#body").addClass("white-text background-img-moderate");
     } else if (aqi <= 150.99) {
         $("#aq").append(`<span class ='new-badge orange'> ${aqi} <i class=" tiny material-icons">info</i></span>`);
+        $("#body").addClass("white-text background-img-sensitive");
     } else if (aqi <= 200.99) {
         $("#aq").append(`<span class ='new-badge red'> ${aqi} <i class=" tiny material-icons">warning</i></span>`);
+        $("#body").addClass("white-text background-img-unhealthy");
     } else if (aqi <= 300.99) {
         $("#aq").append(`<span class ='new-badge purple'> ${aqi} <i class=" tiny material-icons">warning</i></span>`);
+        $("#body").addClass("white-text background-img-vunhealthy");
     } else if (aqi <= 500) {
         $("#aq").append(`<span class ='new-badge maroon'> ${aqi} <i class=" tiny material-icons">warning</i></span>`);
+        $("#body").addClass("white-text background-img-hazardous");
     }
 }
 
