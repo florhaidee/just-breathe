@@ -51,7 +51,7 @@ https://florhaidee.github.io/just-breathe/
 
 * @parkerrobison - Display/layout, materialize.
 * @jasonmcgill - Get visitor's long and lat function. Display current city and date. Display modals
-* @siwel20- Listener for search data and Pollen modal count index reference
+* @siwel20- Listener and button click handler for search city data. Pollen modal and reference button formating.
 * @florhaidee - Air quailty index fetch.  History data validation.
 * @MatthewMcFadden - Pollen count fetch.  Display temperature function. History data 
 
