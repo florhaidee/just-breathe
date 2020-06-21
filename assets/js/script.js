@@ -227,7 +227,23 @@ var buttonClickHandler = function (event) {
                         .then(function (results) {
                             getAirQuality(results.coord.lat, results.coord.lon);
                             getPollenCount(results.coord.lat, results.coord.lon);
+
+                            //save and display user's search history
+                            if (searchHistory.length > 0) {
+                                var validate = preventDuplicate(city)
+                                if (validate === false) {
+                                    searchHistory.push(city);
+                                    localStorage.setItem("search", JSON.stringify(searchHistory));
+                                    renderSearchHistory();
+                                }
+                            } else if (searchHistory.length === 0) {
+                                searchHistory.push(city);
+                                localStorage.setItem("search", JSON.stringify(searchHistory));
+                                renderSearchHistory();
+                            }
                         })
+
+
                 } else {
                     var errorModalContainer = document.createElement("div");
                     errorModalContainer.setAttribute("class", "modal modal-error");
@@ -245,20 +261,10 @@ var buttonClickHandler = function (event) {
 
                     errorInstance.open();
                 };
+
+
             });
-        //save and display user's search history
-        if (searchHistory.length > 0) {
-            var validate = preventDuplicate(city)
-            if (validate === false) {
-                searchHistory.push(city);
-                localStorage.setItem("search", JSON.stringify(searchHistory));
-                renderSearchHistory();
-            }
-        } else if (searchHistory.length === 0) {
-            searchHistory.push(city);
-            localStorage.setItem("search", JSON.stringify(searchHistory));
-            renderSearchHistory();
-        }
+
     };
     //pageGenerate(city);
     // moved this line of code to 151 and 157
@@ -278,6 +284,12 @@ clearEl.addEventListener("click", function () {
 
 // Search History
 function renderSearchHistory() {
+    //Display user's search history
+    if (searchHistory.length > 0) {
+        if (searchHistory.length > 6) {
+            searchHistory.splice(0, 1);
+        }
+    }
     historyEl.innerHTML = "";
 
     for (let i = 0; i < searchHistory.length; i++) {
@@ -291,10 +303,7 @@ function renderSearchHistory() {
         historyEl.appendChild(historyItem);
     }
 }
-//Display user's search history
-if (searchHistory.length > 0) {
-    renderSearchHistory();
-}
+
 
 historyEl.addEventListener("click", function (e) {
     searchCityEl.value = e.target.text;
@@ -303,3 +312,4 @@ historyEl.addEventListener("click", function (e) {
 
 //on page load grab users ip and parse data for latitude and logitude
 localIp();
+renderSearchHistory();
