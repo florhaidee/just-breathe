@@ -16,6 +16,7 @@ We also included the posibility to search for other cities information and gave 
 
 ![unhealthy](./assets/images/readme/unhealthy.JPG)
 
+
 ![unhealthy-read](./assets/images/readme/unhealthy-read.JPG)
 
 * The users can also search for a different city information on the Input field and is presented with that information and added to the search history.
@@ -24,7 +25,7 @@ We also included the posibility to search for other cities information and gave 
 
 * If the user wanted to search a city that is on the search history is presented with Air quality index and Pollen count types for that city.
 
-![Search by history](./assets/images/readme/search-by-history)
+![search-by-history](./assets/images/readme/search-by-history.JPG)
 
 * On the application there is more information available about the air quality index and pollen count types, to access them go to: 
  
