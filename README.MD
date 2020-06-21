@@ -1,10 +1,10 @@
 # Just Breathe
 
 ## Description
-An application that uses third-party API:"Air Visual" and "Climacell", to display air quality index, pollent count and temperature for a given city.
+An application that uses third-party API:"Air Visual" and "Climacell", to display air quality index, pollen count and temperature for a given city.
 
 ## Motivation for development
-Given the current situation with global warming, and the cities every day closest to factories, the level of air quality, pollution and pollen allergies are getting worse. We wanted to create an application where everyone can see if their city has a good air quality and types of pollen count; and even know what are the aftermaths depending on the level of contamination on their city.  
+Given the current situation with global warming, and cities every day getting closer to factories, the level of air quality, pollution and pollen allergies are getting worse. We wanted to create an application where everyone can see if their city has a good air quality and types of pollen count; and even know what are the aftermaths depending on the level of contamination on their city.  
 We also included the posibility to search for other cities information and gave our users the chance to know what are those indexes before move or travel to other cities.
 
 ## Features
@@ -16,11 +16,11 @@ We also included the posibility to search for other cities information and gave 
 
 ![search new city](./assets/images/name)
 
-* If the user wanted to search a city that is on the search history is presented with Air quality index and Pollent count types for that city.
+* If the user wanted to search a city that is on the search history is presented with Air quality index and Pollen count types for that city.
 
 ![Search by history](./assets/images/name)
 
-* On the application is available more information about the air quality index and pollent count types, to accessing them go to: 
+* On the application there is more information available about the air quality index and pollen count types, to access them go to: 
   *Air Quality Index Reference
   *Pollen Index Reference
   
@@ -32,6 +32,7 @@ We also included the posibility to search for other cities information and gave 
 * HTML
 * CSS
 * JavaScript
+* JQuery
 
 ## API and Libraries
 * Materialize 
@@ -45,11 +46,12 @@ We also included the posibility to search for other cities information and gave 
 ## Website
 To visit the page go to:
 https://florhaidee.github.io/just-breathe/
+https://parkerrobison.github.io/just-breathe/
 
 
 ## Contribution
 
-* @parkerrobison - Display/layout, materialize.
+* @parkerrobison - Display/layout, materialize, github, merging, and error handling.
 * @jasonmcgill - Get visitor's long and lat function. Display current city and date. Display modals
 * @siwel20- Listener and button click handler for search city data. Pollen modal and reference button formating.
 * @florhaidee - Air quailty index fetch.  History data validation.

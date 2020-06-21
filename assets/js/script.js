@@ -98,10 +98,7 @@ var displayAQI = function (info) {
     }
 }
 
-// Matt's work 
 function getPollenCount(lat, lon) {
-    // let lat = lat;
-    // let lon = lon;   
     // Display Temperature
     const tempField = "unit_system=us&fields=temp"
     let tempQueryURL = `https://api.climacell.co/v3/weather/realtime?${tempField}&lat=${lat}&lon=${lon}&apikey=${ClimaKey}`
@@ -116,8 +113,6 @@ function getPollenCount(lat, lon) {
         })
     // Display Pollen Count
     const pollenFields = "pollen_tree,pollen_weed,pollen_grass";
-    // let pollenQueryURL = `https://api.climacell.co/v3/weather/realtime?fields=${pollenFields}&lat=40.7608&lon=111.891&apikey=${ClimaKey}`
-    // Need working lat/lon to use this
     let pollenQueryURL = `https://api.climacell.co/v3/weather/realtime?fields=${pollenFields}&lat=${lat}&lon=${lon}&apikey=${ClimaKey}`
     axios.get(pollenQueryURL)
         .then(function (response) {
@@ -141,7 +136,6 @@ function getPollenCount(lat, lon) {
             pollenEl.append(treePollenCount);
         })
 };
-//end Matt's work
 
 //get air quality info receiving as parameters latitude and longitude
 var getAirQuality = function (lat, lon) {
@@ -152,6 +146,7 @@ var getAirQuality = function (lat, lon) {
             // request was successful
             if (response.ok) {
                 response.json().then(function (data) {
+                    // ensures that the keyed in city will be displayed.
                     if (searchCityEl.value.length === 0) {
                         cityEl.innerHTML = data.data.city;
                         cityEl.setAttribute("class", "city-title")
@@ -227,6 +222,21 @@ var buttonClickHandler = function (event) {
                         .then(function (results) {
                             getAirQuality(results.coord.lat, results.coord.lon);
                             getPollenCount(results.coord.lat, results.coord.lon);
+
+                            //save and display user's search history. Moved this from Global to this function to prevent 
+                            //invalid entries from being saved on the history list.
+                            if (searchHistory.length > 0) {
+                                var validate = preventDuplicate(city)
+                                if (validate === false) {
+                                    searchHistory.push(city);
+                                    localStorage.setItem("search", JSON.stringify(searchHistory));
+                                    renderSearchHistory();
+                                }
+                            } else if (searchHistory.length === 0) {
+                                searchHistory.push(city);
+                                localStorage.setItem("search", JSON.stringify(searchHistory));
+                                renderSearchHistory();
+                            }
                         })
                 } else {
                     var errorModalContainer = document.createElement("div");
@@ -246,23 +256,7 @@ var buttonClickHandler = function (event) {
                     errorInstance.open();
                 };
             });
-        //save and display user's search history
-        if (searchHistory.length > 0) {
-            var validate = preventDuplicate(city)
-            if (validate === false) {
-                searchHistory.push(city);
-                localStorage.setItem("search", JSON.stringify(searchHistory));
-                renderSearchHistory();
-            }
-        } else if (searchHistory.length === 0) {
-            searchHistory.push(city);
-            localStorage.setItem("search", JSON.stringify(searchHistory));
-            renderSearchHistory();
-        }
     };
-    //pageGenerate(city);
-    // moved this line of code to 151 and 157
-    // searchCityEl.value = "";
 }
 
 submitBtnEl.addEventListener("click", function () {
@@ -278,6 +272,13 @@ clearEl.addEventListener("click", function () {
 
 // Search History
 function renderSearchHistory() {
+    //Display user's search history
+    if (searchHistory.length > 0) {
+        // Search history will be limited to 6 items.
+        if (searchHistory.length > 6) {
+            searchHistory.splice(0, 1);
+        }
+    }
     historyEl.innerHTML = "";
 
     for (let i = 0; i < searchHistory.length; i++) {
@@ -291,10 +292,6 @@ function renderSearchHistory() {
         historyEl.appendChild(historyItem);
     }
 }
-//Display user's search history
-if (searchHistory.length > 0) {
-    renderSearchHistory();
-}
 
 historyEl.addEventListener("click", function (e) {
     searchCityEl.value = e.target.text;
@@ -303,3 +300,5 @@ historyEl.addEventListener("click", function (e) {
 
 //on page load grab users ip and parse data for latitude and logitude
 localIp();
+// calls to display any pervious entries from local storage
+renderSearchHistory();
