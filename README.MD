@@ -10,17 +10,17 @@ We also included the posibility to search for other cities information and gave 
 ## Features
 * When users open the application the page display Air quality, Pollen count types and temperaure for current location. 
 
-![main-page](./assets/images/readme/main-page)
+![main-page](./assets/images/readme/main-page.JPG)
 
 *The main image is gonna change depending on how serious is the Air Quality Index.
 
-![unhealthy-level-orange](./assets/images/readme/unhealthy)
+![unhealthy-level-orange](./assets/images/readme/unhealthy.JPG)
 
-![unhealthy-read](./assets/images/readme/unhealthy-read)
+![unhealthy-read](./assets/images/readme/unhealthy-read.JPG)
 
 * The users can also search for a different city information on the Input field and is presented with that information and added to the search history.
 
-![search new city](./assets/images/readme/search-new-city)
+![search new city](./assets/images/readme/search-new-city.JPG)
 
 * If the user wanted to search a city that is on the search history is presented with Air quality index and Pollen count types for that city.
 
@@ -30,11 +30,11 @@ We also included the posibility to search for other cities information and gave 
  
  *Air Quality Index Reference
   
-![Air Quality Index Reference](./assets/images/readme/air-quality-index-reference)
+![Air Quality Index Reference](./assets/images/readme/air-quality-index-reference.JPG)
   
   *Pollen Index Reference
 
-![Pollen Index Reference](./assets/images/readme/pollen-index-reference)
+![Pollen Index Reference](./assets/images/readme/pollen-index-reference.JPG)
 
 ## Built With
 * HTML
