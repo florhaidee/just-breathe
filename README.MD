@@ -4,7 +4,7 @@
 An application that uses third-party API:"Air Visual" and "Climacell", to display air quality index, pollen count and temperature for a given city.
 
 ## Motivation for development
-Given the current situation with global warming, and cities every day getting closer to factories, the level of air quality, pollution and pollen allergies are getting worse. We wanted to create an application where everyone can see if their city has a good air quality and types of pollen count; and even know what are the aftermaths depending on the level of contamination on their city.  
+Given the current situation with global warming, and every day cities are getting closer to factories, the level of air quality, pollution and pollen allergies are getting worse. We wanted to create an application where everyone can see if their city has a good air quality and types of pollen count; and even know what are the aftermaths depending on the level of contamination on their city.  
 We also included the posibility to search for other cities information and gave our users the chance to know what are those indexes before move or travel to other cities.
 
 ## Features
