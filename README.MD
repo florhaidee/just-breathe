@@ -14,7 +14,7 @@ We also included the posibility to search for other cities information and gave 
 
 *The main image is gonna change depending on how serious is the Air Quality Index.
 
-![unhealthy](./assets/images/readme/unhealthy.JPG)
+![unhealthy](./assets/images/readme/unhealthy.jpg)
 
 
 ![unhealthy-read](./assets/images/readme/unhealthy-read.JPG)
