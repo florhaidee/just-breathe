@@ -54,7 +54,7 @@ We also included the posibility to search for other cities information and gave 
 
 ## Website
 To visit the page go to:
-https://parkerrobison.github.io/just-breathe/
+https://florhaidee.github.io/just-breathe/
 
 
 ## Contribution
